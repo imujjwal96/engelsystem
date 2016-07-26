@@ -67,6 +67,7 @@ require_once realpath(__DIR__ . '/../includes/controller/admin_settings_controll
 require_once realpath(__DIR__ . '/../includes/controller/user_messages_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_news_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_questions_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/user_myshifts_controller.php');
 
 require_once realpath(__DIR__ . '/../includes/helper/graph_helper.php');
 require_once realpath(__DIR__ . '/../includes/helper/internationalization_helper.php');
@@ -87,7 +88,6 @@ if ($maintenance_mode) {
 }
 
 require_once realpath(__DIR__ . '/../includes/pages/guest_login.php');
-require_once realpath(__DIR__ . '/../includes/pages/user_myshifts.php');
 require_once realpath(__DIR__ . '/../includes/pages/user_settings.php');
 require_once realpath(__DIR__ . '/../includes/pages/user_shifts.php');
 
