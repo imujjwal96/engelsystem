@@ -78,7 +78,6 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     $content = user_myshifts();
   } elseif ($p == "user_shifts") {
     $title = shifts_title();
-
     $content = user_shifts();
   } elseif ($p == "user_messages") {
     $title = messages_title();
@@ -141,7 +140,7 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     $title = admin_export_title();
     $content = admin_export();
   } elseif ($p == "credits") {
-    require_once realpath(__DIR__ . '/../includes/pages/guest_credits.php');
+    require_once realpath(__DIR__ . '/../includes/controller/guest_credits_controller.php');
     $title = credits_title();
     $content = guest_credits();
   } else {

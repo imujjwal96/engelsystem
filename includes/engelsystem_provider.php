@@ -34,6 +34,8 @@ require_once realpath(__DIR__ . '/../includes/model/admin_questions_model.php');
 require_once realpath(__DIR__ . '/../includes/model/user_news_model.php');
 require_once realpath(__DIR__ . '/../includes/model/user_atom_model.php');
 require_once realpath(__DIR__ . '/../includes/model/user_questions_model.php');
+require_once realpath(__DIR__ . '/../includes/model/user_myshifts_model.php');
+require_once realpath(__DIR__ . '/../includes/model/user_settings_model.php');
 
 require_once realpath(__DIR__ . '/../includes/view/AngelTypes_view.php');
 require_once realpath(__DIR__ . '/../includes/view/Questions_view.php');
@@ -68,6 +70,8 @@ require_once realpath(__DIR__ . '/../includes/controller/user_messages_controlle
 require_once realpath(__DIR__ . '/../includes/controller/user_news_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_questions_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_myshifts_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/user_shifts_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/user_settings_controller.php');
 
 require_once realpath(__DIR__ . '/../includes/helper/graph_helper.php');
 require_once realpath(__DIR__ . '/../includes/helper/internationalization_helper.php');
@@ -88,8 +92,6 @@ if ($maintenance_mode) {
 }
 
 require_once realpath(__DIR__ . '/../includes/pages/guest_login.php');
-require_once realpath(__DIR__ . '/../includes/pages/user_settings.php');
-require_once realpath(__DIR__ . '/../includes/pages/user_shifts.php');
 
 require_once realpath(__DIR__ . '/../vendor/parsedown/Parsedown.php');
 
