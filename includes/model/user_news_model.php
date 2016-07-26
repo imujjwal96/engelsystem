@@ -31,5 +31,4 @@ function insert_news_val($betreff, $text, $uid, $treffen) {
 function select_news_by_date($page, $DISPLAY_NEWS) {
   return sql_select("SELECT * FROM `News` ORDER BY `Datum` DESC LIMIT " . sql_escape($page * $DISPLAY_NEWS) . ", " . sql_escape($DISPLAY_NEWS));
 }
-
 ?>
