@@ -67,7 +67,7 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     $title = news_title();
     $content = user_news();
   } elseif ($p == "news_comments") {
-    require_once realpath(__DIR__ . '/../includes/pages/user_news.php');
+    require_once realpath(__DIR__ . '/../includes/controller/user_news_controller.php');
     $title = user_news_comments_title();
     $content = user_news_comments();
   } elseif ($p == "user_meetings") {
