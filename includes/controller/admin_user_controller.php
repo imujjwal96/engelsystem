@@ -25,7 +25,7 @@ function admin_user() {
     $html .= "Hello,<br />" . "Here you can change the entries. Under the point 'Down'
 the angel is present if it is marked 'Yes'  ." . " If a 'Yes' " . " is there under active than the angel is active " . "thus has a claim on the T-shirt.". " If T-shirt contains a 'Yes' ".  "than it means angel has already received his T-shirt." . "<br /><br />\n";
 
-    $html .= "<form action=\"" . page_link_to("admin_user_controller") . "&action=save&id=$id\" method=\"post\">\n";
+    $html .= "<form action=\"" . page_link_to("admin_user") . "&action=save&id=$id\" method=\"post\">\n";
     $html .= "<table border=\"0\">\n";
     $html .= "<input type=\"hidden\" name=\"Type\" value=\"Normal\">\n";
     $html .= "<tr><td>\n";
@@ -79,7 +79,7 @@ the angel is present if it is marked 'Yes'  ." . " If a 'Yes' " . " is there und
 
     $html .= form_info('', _('Please visit the angeltypes page or the users profile to manage users angeltypes.'));
 
-    $html .= "Here you can reset the password of this angel.<form action=\"" . page_link_to("admin_user_controller") . "&action=change_pw&id=$id\" method=\"post\">\n";
+    $html .= "Here you can reset the password of this angel.<form action=\"" . page_link_to("admin_user") . "&action=change_pw&id=$id\" method=\"post\">\n";
     $html .= "<table>\n";
     $html .= "  <tr><td>Password</td><td>" . "<input type=\"password\" size=\"40\" name=\"new_pw\" value=\"\"></td></tr>\n";
     $html .= "  <tr><td>Repeat Password</td><td>" . "<input type=\"password\" size=\"40\" name=\"new_pw2\" value=\"\"></td></tr>\n";
@@ -99,7 +99,7 @@ the angel is present if it is marked 'Yes'  ." . " If a 'Yes' " . " is there und
       $his_highest_group = $his_highest_group[0]['group_id'];
 
     if ($id != $user['UID'] && $my_highest_group <= $his_highest_group) {
-      $html .= "Hier kannst Du die Benutzergruppen des Engels festlegen:<form action=\"" . page_link_to("admin_user_controller") . "&action=save_groups&id=" . $id . "\" method=\"post\">\n";
+      $html .= "Hier kannst Du die Benutzergruppen des Engels festlegen:<form action=\"" . page_link_to("admin_user") . "&action=save_groups&id=" . $id . "\" method=\"post\">\n";
       $html .= '<table>';
 
       $groups = Groups_by_id_groups($id, $my_highest_group);

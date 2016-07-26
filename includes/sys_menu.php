@@ -115,19 +115,19 @@ function make_navigation() {
 
   $admin_menu = array();
   $admin_pages = array(
-      "admin_arrive_controller" => admin_arrive_title(),
-      "admin_active_controller" => admin_active_title(),
-      "admin_user_controller" => admin_user_title(),
-      "admin_free_controller" => admin_free_title(),
-      "admin_questions_controller" => admin_questions_title(),
+      "admin_arrive" => admin_arrive_title(),
+      "admin_active" => admin_active_title(),
+      "admin_user" => admin_user_title(),
+      "admin_free" => admin_free_title(),
+      "admin_questions" => admin_questions_title(),
       "shifttypes" => shifttypes_title(),
-      "admin_shifts_controller" => admin_shifts_title(),
-      "admin_rooms_controller" => admin_rooms_title(),
-      "admin_groups_controller" => admin_groups_title(),
-      "admin_import_controller" => admin_import_title(),
-      "admin_log_controller" => admin_log_title(),
-      "admin_export_controller" => admin_export_title(),
-      "admin_settings_controller" => admin_settings_title()
+      "admin_shifts" => admin_shifts_title(),
+      "admin_rooms" => admin_rooms_title(),
+      "admin_groups" => admin_groups_title(),
+      "admin_import" => admin_import_title(),
+      "admin_log" => admin_log_title(),
+      "admin_export" => admin_export_title(),
+      "admin_settings" => admin_settings_title()
   );
 
   foreach ($admin_pages as $page => $title)

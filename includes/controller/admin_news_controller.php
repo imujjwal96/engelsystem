@@ -30,9 +30,9 @@ function admin_news() {
               form_textarea('eText', _("Message"), $news['Text']),
               form_checkbox('eTreffen', _("Meeting"), $news['Treffen'] == 1, 1),
               form_submit('submit', _("Save"))
-          ), page_link_to('admin_news_controller&action=save&id=' . $id));
+          ), page_link_to('admin_news&action=save&id=' . $id));
 
-          $html .= '<a class="btn btn-danger" href="' . page_link_to('admin_news_controller&action=delete&id=' . $id) . '"><span class="glyphicon glyphicon-trash"></span> ' . _("Delete") . '</a>';
+          $html .= '<a class="btn btn-danger" href="' . page_link_to('admin_news&action=delete&id=' . $id) . '"><span class="glyphicon glyphicon-trash"></span> ' . _("Delete") . '</a>';
           break;
 
         case 'save':

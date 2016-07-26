@@ -115,7 +115,7 @@ function admin_rooms() {
 
           engelsystem_log("Set needed angeltypes of room " . $name . " to: " . join(", ", $needed_angeltype_info));
           success(_("Room saved."));
-          redirect(page_link_to("admin_rooms_controller"));
+          redirect(page_link_to("admin_rooms"));
         }
       }
       $angeltypes_count_form = array();
@@ -126,7 +126,7 @@ function admin_rooms() {
 
       return page_with_title(admin_rooms_title(), array(
           buttons(array(
-              button(page_link_to('admin_rooms_controller'), _("back"), 'back')
+              button(page_link_to('admin_rooms'), _("back"), 'back')
           )),
           $msg,
           form(array(
@@ -156,16 +156,16 @@ function admin_rooms() {
 
         engelsystem_log("Room deleted: " . $name);
         success(sprintf(_("Room %s deleted."), $name));
-        redirect(page_link_to('admin_rooms_controller'));
+        redirect(page_link_to('admin_rooms'));
       }
 
       return page_with_title(admin_rooms_title(), array(
           buttons(array(
-              button(page_link_to('admin_rooms_controller'), _("back"), 'back')
+              button(page_link_to('admin_rooms'), _("back"), 'back')
           )),
           sprintf(_("Do you want to delete room %s?"), $name),
           buttons(array(
-              button(page_link_to('admin_rooms_controller') . '&show=delete&id=' . $id . '&ack', _("Delete"), 'delete')
+              button(page_link_to('admin_rooms') . '&show=delete&id=' . $id . '&ack', _("Delete"), 'delete')
           ))
       ));
     }
@@ -173,7 +173,7 @@ function admin_rooms() {
 
   return page_with_title(admin_rooms_title(), array(
       buttons(array(
-          button(page_link_to('admin_rooms_controller') . '&show=edit', _("add"))
+          button(page_link_to('admin_rooms') . '&show=edit', _("add"))
       )),
       msg(),
       table(array(

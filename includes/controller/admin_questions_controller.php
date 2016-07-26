@@ -10,7 +10,7 @@ function admin_new_questions() {
     $new_messages = Questions();
 
     if ($new_messages > 0)
-      return info('<a href="' . page_link_to("admin_questions_controller") . '">' . _('There are unanswered questions!') . '</a>', true);
+      return info('<a href="' . page_link_to("admin_questions") . '">' . _('There are unanswered questions!') . '</a>', true);
   }
 
   return "";
@@ -33,8 +33,8 @@ function admin_questions() {
           'answer' => form(array(
               form_textarea('answer', '', ''),
               form_submit('submit', _("Save"))
-          ), page_link_to('admin_questions_controller') . '&action=answer&id=' . $question['QID']),
-          'actions' => button(page_link_to("admin_questions_controller") . '&action=delete&id=' . $question['QID'], _("delete"), 'btn-xs')
+          ), page_link_to('admin_questions') . '&action=answer&id=' . $question['QID']),
+          'actions' => button(page_link_to("admin_questions") . '&action=delete&id=' . $question['QID'], _("delete"), 'btn-xs')
       );
     }
 
@@ -53,7 +53,7 @@ function admin_questions() {
           'question' => str_replace("\n", "<br />", $question['Question']),
           'answered_by' => User_Nick_render($answer_user_source),
           'answer' => str_replace("\n", "<br />", $question['Answer']),
-          'actions' => button(page_link_to("admin_questions_controller") . '&action=delete&id=' . $question['QID'], _("delete"), 'btn-xs')
+          'actions' => button(page_link_to("admin_questions") . '&action=delete&id=' . $question['QID'], _("delete"), 'btn-xs')
       );
     }
 
@@ -89,7 +89,7 @@ function admin_questions() {
           if ($answer != "") {
             update_questions($user, $answer, $id);
             engelsystem_log("Question " . $question[0]['Question'] . " answered: " . $answer);
-            redirect(page_link_to("admin_questions_controller"));
+            redirect(page_link_to("admin_questions"));
           } else
             return error("Gib eine Antwort ein!", true);
         } else
@@ -105,7 +105,7 @@ function admin_questions() {
         if (count($question) > 0) {
           delete_questions_by_id($id);
           engelsystem_log("Question deleted: " . $question[0]['Question']);
-          redirect(page_link_to("admin_questions_controller"));
+          redirect(page_link_to("admin_questions"));
         } else
           return error("No question found.", true);
         break;
