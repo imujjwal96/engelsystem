@@ -33,4 +33,3 @@ function select_news_by_date($page, $DISPLAY_NEWS) {
 }
 
 ?>
-
