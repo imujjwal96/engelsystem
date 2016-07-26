@@ -45,7 +45,7 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     require_once realpath(__DIR__ . '/../includes/controller/shifts_controller.php');
     shifts_json_export_all_controller();
   } elseif ($p == "stats") {
-    require_once realpath(__DIR__ . '/../includes/pages/guest_stats.php');
+    require_once realpath(__DIR__ . '/../includes/controller/guest_stats_controller.php');
     guest_stats();
   } elseif ($p == "user_password_recovery") {
     require_once realpath(__DIR__ . '/../includes/controller/users_controller.php');
@@ -144,7 +144,7 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     $title = credits_title();
     $content = guest_credits();
   } else {
-    require_once realpath(__DIR__ . '/../includes/pages/guest_start.php');
+    require_once realpath(__DIR__ . '/../includes/controller/guest_start_controller.php');
     $content = guest_start();
   }
 } else {
