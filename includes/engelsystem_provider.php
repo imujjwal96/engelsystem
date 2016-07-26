@@ -32,6 +32,8 @@ require_once realpath(__DIR__ . '/../includes/model/admin_import_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_news_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_questions_model.php');
 require_once realpath(__DIR__ . '/../includes/model/user_news_model.php');
+require_once realpath(__DIR__ . '/../includes/model/user_atom_model.php');
+
 
 require_once realpath(__DIR__ . '/../includes/view/AngelTypes_view.php');
 require_once realpath(__DIR__ . '/../includes/view/Questions_view.php');
