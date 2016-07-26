@@ -33,10 +33,10 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     redirect(page_link_to('login'));
     api_controller();
   } elseif ($p == "ical") {
-    require_once realpath(__DIR__ . '/../includes/pages/user_ical.php');
+    require_once realpath(__DIR__ . '/../includes/controller/user_ical_controller.php');
     user_ical();
   } elseif ($p == "atom") {
-    require_once realpath(__DIR__ . '/../includes/pages/user_atom.php');
+    require_once realpath(__DIR__ . '/../includes/controller/user_atom_controller.php');
     user_atom();
   } elseif ($p == "shifts_json_export") {
     require_once realpath(__DIR__ . '/../includes/controller/shifts_controller.php');
