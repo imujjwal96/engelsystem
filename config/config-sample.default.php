@@ -62,9 +62,9 @@ $api_key = "";
 // MySQL-Connection Settings
 $config = array(
     'host' => "localhost",
-    'user' => "root",
-    'pw' => "",
-    'db' => "engelsystem"
+    'user' => "username_here",
+    'pw' => "password_here",
+    'db' => "database_name_here"
 );
 
 /** reCaptcha Settings
