@@ -25,6 +25,7 @@ require_once realpath(__DIR__ . '/../includes/model/User_model.php');
 require_once realpath(__DIR__ . '/../includes/model/Settings_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_active_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_arrive_model.php');
+require_once realpath(__DIR__ . '/../includes/model/admin_cgroup_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_export_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_free_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_groups_model.php');
@@ -69,6 +70,7 @@ require_once realpath(__DIR__ . '/../includes/controller/admin_rooms_controller.
 require_once realpath(__DIR__ . '/../includes/controller/admin_shifts_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/admin_user_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/admin_settings_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/admin_cgroups_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_messages_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_news_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_questions_controller.php');
