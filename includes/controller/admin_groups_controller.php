@@ -20,7 +20,7 @@ function admin_groups() {
       $groups_table[] = array(
           'name' => $group['Name'],
           'privileges' => join(', ', $privileges_html),
-          'actions' => button(page_link_to('admin_groups_controller') . '&action=edit&id=' . $group['UID'], _("edit"), 'btn-xs')
+          'actions' => button(page_link_to('admin_groups') . '&action=edit&id=' . $group['UID'], _("edit"), 'btn-xs')
       );
     }
 
@@ -52,7 +52,7 @@ function admin_groups() {
 
           $privileges_form[] = form_submit('submit', _("Save"));
           $html .= page_with_title(_("Edit group"), array(
-              form($privileges_form, page_link_to('admin_groups_controller') . '&action=save&id=' . $id)
+              form($privileges_form, page_link_to('admin_groups') . '&action=save&id=' . $id)
           ));
         } else
           return error("No Group found.", true);
@@ -81,7 +81,7 @@ function admin_groups() {
             }
           }
           engelsystem_log("Group privileges of group " . $room['Name'] . " edited: " . join(", ", $privilege_names));
-          redirect(page_link_to("admin_groups_controller"));
+          redirect(page_link_to("admin_groups"));
         } else
           return error("No Group found.", true);
         break;

@@ -52,7 +52,7 @@ function admin_free() {
         'dect' => $usr['DECT'],
         'jabber' => $usr['jabber'],
         'email' => $usr['email'],
-        'actions' => in_array('admin_user_controller', $privileges) ? button(page_link_to('admin_user_controller') . '&amp;id=' . $usr['UID'], _("edit"), 'btn-xs') : ''
+        'actions' => in_array('admin_user', $privileges) ? button(page_link_to('admin_user') . '&amp;id=' . $usr['UID'], _("edit"), 'btn-xs') : ''
     );
   }
   return page_with_title(admin_free_title(), array(

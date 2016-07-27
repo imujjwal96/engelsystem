@@ -31,6 +31,14 @@ require_once realpath(__DIR__ . '/../includes/model/admin_groups_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_import_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_news_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_questions_model.php');
+require_once realpath(__DIR__ . '/../includes/model/user_news_model.php');
+require_once realpath(__DIR__ . '/../includes/model/user_atom_model.php');
+require_once realpath(__DIR__ . '/../includes/model/user_questions_model.php');
+require_once realpath(__DIR__ . '/../includes/model/user_myshifts_model.php');
+require_once realpath(__DIR__ . '/../includes/model/user_settings_model.php');
+require_once realpath(__DIR__ . '/../includes/model/guest_stats_model.php');
+require_once realpath(__DIR__ . '/../includes/model/admin_user_model.php');
+require_once realpath(__DIR__ . '/../includes/model/guest_login_model.php');
 
 require_once realpath(__DIR__ . '/../includes/view/AngelTypes_view.php');
 require_once realpath(__DIR__ . '/../includes/view/Questions_view.php');
@@ -61,6 +69,13 @@ require_once realpath(__DIR__ . '/../includes/controller/admin_rooms_controller.
 require_once realpath(__DIR__ . '/../includes/controller/admin_shifts_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/admin_user_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/admin_settings_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/user_messages_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/user_news_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/user_questions_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/user_myshifts_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/user_shifts_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/user_settings_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/guest_login_controller.php');
 
 require_once realpath(__DIR__ . '/../includes/helper/graph_helper.php');
 require_once realpath(__DIR__ . '/../includes/helper/internationalization_helper.php');
@@ -79,14 +94,6 @@ if ($maintenance_mode) {
   echo file_get_contents(__DIR__ . '/../public/maintenance.html');
   die();
 }
-
-require_once realpath(__DIR__ . '/../includes/pages/guest_login.php');
-require_once realpath(__DIR__ . '/../includes/pages/user_messages.php');
-require_once realpath(__DIR__ . '/../includes/pages/user_myshifts.php');
-require_once realpath(__DIR__ . '/../includes/pages/user_news.php');
-require_once realpath(__DIR__ . '/../includes/pages/user_questions.php');
-require_once realpath(__DIR__ . '/../includes/pages/user_settings.php');
-require_once realpath(__DIR__ . '/../includes/pages/user_shifts.php');
 
 require_once realpath(__DIR__ . '/../vendor/parsedown/Parsedown.php');
 

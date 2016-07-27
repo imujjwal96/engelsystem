@@ -33,10 +33,10 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     redirect(page_link_to('login'));
     api_controller();
   } elseif ($p == "ical") {
-    require_once realpath(__DIR__ . '/../includes/pages/user_ical.php');
+    require_once realpath(__DIR__ . '/../includes/controller/user_ical_controller.php');
     user_ical();
   } elseif ($p == "atom") {
-    require_once realpath(__DIR__ . '/../includes/pages/user_atom.php');
+    require_once realpath(__DIR__ . '/../includes/controller/user_atom_controller.php');
     user_atom();
   } elseif ($p == "shifts_json_export") {
     require_once realpath(__DIR__ . '/../includes/controller/shifts_controller.php');
@@ -45,7 +45,7 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     require_once realpath(__DIR__ . '/../includes/controller/shifts_controller.php');
     shifts_json_export_all_controller();
   } elseif ($p == "stats") {
-    require_once realpath(__DIR__ . '/../includes/pages/guest_stats.php');
+    require_once realpath(__DIR__ . '/../includes/controller/guest_stats_controller.php');
     guest_stats();
   } elseif ($p == "user_password_recovery") {
     require_once realpath(__DIR__ . '/../includes/controller/users_controller.php');
@@ -67,7 +67,7 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     $title = news_title();
     $content = user_news();
   } elseif ($p == "news_comments") {
-    require_once realpath(__DIR__ . '/../includes/pages/user_news.php');
+    require_once realpath(__DIR__ . '/../includes/controller/user_news_controller.php');
     $title = user_news_comments_title();
     $content = user_news_comments();
   } elseif ($p == "user_meetings") {
@@ -78,7 +78,6 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     $content = user_myshifts();
   } elseif ($p == "user_shifts") {
     $title = shifts_title();
-
     $content = user_shifts();
   } elseif ($p == "user_messages") {
     $title = messages_title();
@@ -98,54 +97,51 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
   } elseif ($p == "logout") {
     $title = logout_title();
     $content = guest_logout();
-  } elseif ($p == "admin_questions_controller") {
+  } elseif ($p == "admin_questions") {
     $title = admin_questions_title();
     $content = admin_questions();
-  } elseif ($p == "admin_user_controller") {
+  } elseif ($p == "admin_user") {
     $title = admin_user_title();
     $content = admin_user();
-  } elseif ($p == "admin_arrive_controller") {
+  } elseif ($p == "admin_arrive") {
     $title = admin_arrive_title();
     $content = admin_arrive();
-  } elseif ($p == "admin_active_controller") {
+  } elseif ($p == "admin_active") {
     $title = admin_active_title();
     $content = admin_active();
-  } elseif ($p == "admin_free_controller") {
+  } elseif ($p == "admin_free") {
     $title = admin_free_title();
     $content = admin_free();
-  } elseif ($p == "admin_news_controller") {
+  } elseif ($p == "admin_news") {
     require_once realpath(__DIR__ . '/../includes/controller/admin_news_controller.php');
     $content = admin_news();
-  } elseif ($p == "admin_rooms_controller") {
+  } elseif ($p == "admin_rooms") {
     $title = admin_rooms_title();
     $content = admin_rooms();
-  } elseif ($p == "admin_groups_controller") {
+  } elseif ($p == "admin_groups") {
     $title = admin_groups_title();
     $content = admin_groups();
-  } elseif ($p == "admin_language") {
-    require_once realpath(__DIR__ . '/../includes/pages/admin_language.php');
-    $content = admin_language();
-  } elseif ($p == "admin_import_controller") {
+  } elseif ($p == "admin_import") {
     $title = admin_import_title();
     $content = admin_import();
-  } elseif ($p == "admin_shifts_controller") {
+  } elseif ($p == "admin_shifts") {
     $title = admin_shifts_title();
     $content = admin_shifts();
-  } elseif ($p == "admin_log_controller") {
+  } elseif ($p == "admin_log") {
     $title = admin_log_title();
     $content = admin_log();
-  } elseif ($p == "admin_settings_controller") {
+  } elseif ($p == "admin_settings") {
     $title = admin_settings_title();
     $content = admin_settings();
-  } elseif ($p == "admin_export_controller") {
+  } elseif ($p == "admin_export") {
     $title = admin_export_title();
     $content = admin_export();
   } elseif ($p == "credits") {
-    require_once realpath(__DIR__ . '/../includes/pages/guest_credits.php');
+    require_once realpath(__DIR__ . '/../includes/controller/guest_credits_controller.php');
     $title = credits_title();
     $content = guest_credits();
   } else {
-    require_once realpath(__DIR__ . '/../includes/pages/guest_start.php');
+    require_once realpath(__DIR__ . '/../includes/controller/guest_start_controller.php');
     $content = guest_start();
   }
 } else {

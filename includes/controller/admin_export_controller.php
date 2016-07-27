@@ -50,7 +50,7 @@ function admin_export() {
     $handle = fopen($file, "r");
     if ($file == NULL) {
       error(_('Please select a file to import'));
-      redirect(page_link_to('admin_export_controller'));
+      redirect(page_link_to('admin_export'));
     }
     else{
       while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
@@ -122,10 +122,10 @@ function admin_export() {
 
       if ($sql) {
         success(_("You database has imported successfully!"));
-        redirect(page_link_to('admin_export_controller'));
+        redirect(page_link_to('admin_export'));
       } else {
         error(_('Sorry! There is some problem in the import file.'));
-        redirect(page_link_to('admin_export_controller'));
+        redirect(page_link_to('admin_export'));
         }
     }
   }
