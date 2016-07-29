@@ -148,14 +148,9 @@ function user_controller() {
   $shifts = Shifts_by_user($user_source);
   foreach ($shifts as &$shift) {
     // TODO: Move queries to model
-    $shift['needed_angeltypes'] = sql_select("SELECT DISTINCT `AngelTypes`.* FROM `ShiftEntry` JOIN `AngelTypes` ON `ShiftEntry`.`TID`=`AngelTypes`.`id` WHERE `ShiftEntry`.`SID`='" . sql_escape($shift['SID']) . "'  ORDER BY `AngelTypes`.`name`");
+    $shift['needed_angeltypes'] = shift_needed_angeltypes($shift['SID']);
     foreach ($shift['needed_angeltypes'] as &$needed_angeltype) {
-      $needed_angeltype['users'] = sql_select("
-          SELECT `ShiftEntry`.`freeloaded`, `User`.*
-          FROM `ShiftEntry`
-          JOIN `User` ON `ShiftEntry`.`UID`=`User`.`UID`
-          WHERE `ShiftEntry`.`SID`='" . sql_escape($shift['SID']) . "'
-          AND `ShiftEntry`.`TID`='" . sql_escape($needed_angeltype['id']) . "'");
+      $needed_angeltype['users'] = needed_angeltype_by_shift($shift['SID'], $needed_angeltype['id']);
     }
   }
 

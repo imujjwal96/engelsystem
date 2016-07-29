@@ -274,4 +274,15 @@ function Shifts() {
   return $shifts_source;
 }
 
+function shifts_ical($uid) {
+  return sql_select("
+      SELECT `ShiftTypes`.`name`, `Shifts`.*, `Room`.`Name` as `room_name`
+      FROM `ShiftEntry`
+      INNER JOIN `Shifts` ON (`ShiftEntry`.`SID` = `Shifts`.`SID`)
+      INNER JOIN `ShiftTypes` ON (`Shifts`.`shifttype_id`=`ShiftTypes`.`id`)
+      INNER JOIN `Room` ON (`Shifts`.`RID` = `Room`.`RID`)
+      WHERE `UID`='" . sql_escape($uid) . "'
+      ORDER BY `start`");
+}
+
 ?>
