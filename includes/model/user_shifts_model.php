@@ -33,7 +33,7 @@ function selects_angeltype_by_names() {
 }
 
 function selects_needed_angeltypes_by_roomid($rid) {
-  return sql_select("SELECT `AngelTypes`.*, `NeededAngelTypes`.`count` FROM `AngelTypes` LEFT JOIN `NeededAngelTypes` ON (`NeededAngelTypes`.`angel_type_id` = `AngelTypes`.`id` AND `NeededAngelTypes`.`room_id`='" . sql_escape($sid) . "') ORDER BY `AngelTypes`.`name`");
+  return sql_select("SELECT `AngelTypes`.*, `NeededAngelTypes`.`count` FROM `AngelTypes` LEFT JOIN `NeededAngelTypes` ON (`NeededAngelTypes`.`angel_type_id` = `AngelTypes`.`id` AND `NeededAngelTypes`.`room_id`='" . sql_escape($rid) . "') ORDER BY `AngelTypes`.`name`");
 }
 
 function selects_needed_angeltypes_by_shiftid($sid) {
