@@ -39,6 +39,7 @@ require_once realpath(__DIR__ . '/../includes/model/user_settings_model.php');
 require_once realpath(__DIR__ . '/../includes/model/guest_stats_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_user_model.php');
 require_once realpath(__DIR__ . '/../includes/model/guest_login_model.php');
+require_once realpath(__DIR__ . '/../includes/model/user_shifts_model.php');
 
 require_once realpath(__DIR__ . '/../includes/view/AngelTypes_view.php');
 require_once realpath(__DIR__ . '/../includes/view/Questions_view.php');
