@@ -38,11 +38,11 @@ function admin_create_groups() {
       $ok = false;
       $msg .= error(_("Please enter your Group UID."), true);
     }
-    
+
     foreach ($privilege_source as $selected_privileges_id)
        if (isset($_REQUEST['privilege_types_' . $selected_privilege_id['id'] ]))
         $selected_privileges[] = $selected_privileges_id['id'];
-        
+
   }
 
   if ($ok) {
