@@ -285,4 +285,45 @@ function shifts_ical($uid) {
       ORDER BY `start`");
 }
 
+function shiftentry_select($sid, $uid) {
+  return sql_select("
+      SELECT *
+      FROM `Shifts`
+      INNER JOIN `ShiftEntry` USING (`SID`)
+      WHERE `ShiftEntry`.`id`='" . sql_escape($sid) . "' AND `UID`='" . sql_escape($uid) . "'");
+}
+
+function selects_session_shifttypes($session_var, $starttime, $endtime) {
+  return sql_select("
+      SELECT `ShiftTypes`.`name`, `Shifts`.*
+      FROM `Shifts`
+      INNER JOIN `ShiftTypes` ON (`ShiftTypes`.`id` = `Shifts`.`shifttype_id`)
+      INNER JOIN `ShiftEntry` ON (`Shifts`.`SID` = `ShiftEntry`.`SID` AND `ShiftEntry`.`UID` = '" . sql_escape($user['UID']) . "')
+      WHERE `Shifts`.`RID` IN (" . implode(',', $session_var) . ")
+      AND `start` BETWEEN " . $starttime . " AND " . $endtime);
+}
+
+function gets_days() {
+  return sql_select_single_col("
+      SELECT DISTINCT DATE(FROM_UNIXTIME(`start`)) AS `id`, DATE(FROM_UNIXTIME(`start`)) AS `name`
+      FROM `Shifts`
+      ORDER BY `start`");
+}
+
+function dele_shifts($sid) {
+  return sql_query("DELETE FROM `Shifts` WHERE `SID` = '" . sql_escape($sid) . "'");
+}
+
+function selects_shift_by_shift_ids($shift_id) {
+  return sql_select("
+      SELECT `ShiftTypes`.`name`, `Shifts`.*, `Room`.* FROM `Shifts`
+      JOIN `Room` ON (`Shifts`.`RID` = `Room`.`RID`)
+      JOIN `ShiftTypes` ON (`ShiftTypes`.`id` = `Shifts`.`shifttype_id`)
+      WHERE `SID`='" . sql_escape($shift_id) . "'");
+}
+
+function Shifts_by_start() {
+  return sql_select("SELECT * FROM `Shifts` WHERE `PSID` IS NOT NULL ORDER BY `start`");
+}
+
 ?>
