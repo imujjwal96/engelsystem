@@ -282,4 +282,274 @@ function User_get_eligable_voucher_count(&$user) {
 	return $elegible_vouchers;
 }
 
+function shift_needed_angeltypes($sid) {
+  return sql_select("SELECT DISTINCT `AngelTypes`.* FROM `ShiftEntry` JOIN `AngelTypes` ON `ShiftEntry`.`TID`=`AngelTypes`.`id` WHERE `ShiftEntry`.`SID`='" . sql_escape($sid) . "'  ORDER BY `AngelTypes`.`name`");
+}
+
+function needed_angeltype_by_shift($sid, $needed_angeltype_id) {
+  return sql_select("
+      SELECT `ShiftEntry`.`freeloaded`, `User`.*
+      FROM `ShiftEntry`
+      JOIN `User` ON `ShiftEntry`.`UID`=`User`.`UID`
+      WHERE `ShiftEntry`.`SID`='" . sql_escape($sid) . "'
+      AND `ShiftEntry`.`TID`='" . sql_escape($needed_angeltype_id) . "'");
+}
+
+function User_update_unset_Gokemon($id) {
+  return sql_query("UPDATE `User` SET `Gekommen`=0, `arrival_date` = NULL WHERE `UID`='" . sql_escape($id) . "' LIMIT 1");
+}
+
+function User_update_set_Gokemon($id) {
+return sql_query("UPDATE `User` SET `Gekommen`=1, `arrival_date`='" . time() . "' WHERE `UID`='" . sql_escape($id) . "' LIMIT 1");
+}
+
+function User_update_activ_tshirt() {
+  return sql_query("UPDATE `User` SET `Aktiv` = 0 WHERE `Tshirt` = 0");
+}
+
+function User_select_set_active() {
+   return sql_select("
+          SELECT `User`.*, COUNT(`ShiftEntry`.`id`) as `shift_count`, ${shift_sum_formula} as `shift_length`
+          FROM `User`
+          LEFT JOIN `ShiftEntry` ON `User`.`UID` = `ShiftEntry`.`UID`
+          LEFT JOIN `Shifts` ON `ShiftEntry`.`SID` = `Shifts`.`SID`
+          WHERE `User`.`Gekommen` = 1 AND `User`.`force_active`=0
+          GROUP BY `User`.`UID`
+          ORDER BY `force_active` DESC, `shift_length` DESC" . $limit);
+}
+
+function User_set_active($uid) {
+  return sql_query("UPDATE `User` SET `Aktiv` = 1 WHERE `UID`='" . sql_escape($uid) . "'");
+}
+
+function User_actice_force_active() {
+  return sql_query("UPDATE `User` SET `Aktiv`=1 WHERE `force_active`=TRUE");
+}
+
+function User_update_active($id) {
+  return sql_query("UPDATE `User` SET `Aktiv`=1 WHERE `UID`='" . sql_escape($id) . "' LIMIT 1");
+}
+
+function User_update_inactive($id) {
+  return sql_query("UPDATE `User` SET `Aktiv`=0 WHERE `UID`='" . sql_escape($id) . "' LIMIT 1");
+}
+
+function User_update_tshirt($id) {
+  return sql_query("UPDATE `User` SET `Tshirt`=1 WHERE `UID`='" . sql_escape($id) . "' LIMIT 1");
+}
+
+function User_update_not_tshirt($id) {
+  return sql_query("UPDATE `User` SET `Tshirt`=0 WHERE `UID`='" . sql_escape($id) . "' LIMIT 1");
+}
+
+function User_select_not_tshirt($shift_sum_formula, $show_all_shifts, $limit) {
+  return  sql_select("
+      SELECT `User`.*, COUNT(`ShiftEntry`.`id`) as `shift_count`, ${shift_sum_formula} as `shift_length`
+      FROM `User` LEFT JOIN `ShiftEntry` ON `User`.`UID` = `ShiftEntry`.`UID`
+      LEFT JOIN `Shifts` ON `ShiftEntry`.`SID` = `Shifts`.`SID`
+      WHERE `User`.`Gekommen` = 1
+      " . ($show_all_shifts ? "" : "AND (`Shifts`.`end` < " . time() . " OR `Shifts`.`end` IS NULL)") . "
+      GROUP BY `User`.`UID`
+      ORDER BY `force_active` DESC, `shift_length` DESC" . $limit);
+}
+
+function Shirt_statistics_needed($size) {
+  return sql_select_single_cell("SELECT count(*) FROM `User` WHERE `Size`='" . sql_escape($size) . "' AND `Gekommen`=1");
+}
+
+function Shirt_statistics_given($size) {
+  return sql_select_single_cell("SELECT count(*) FROM `User` WHERE `Size`='" . sql_escape($size) . "' AND `Tshirt`=1");
+}
+
+function User_select_free($angeltypesearch) {
+  return sql_select("
+      SELECT `User`.*
+      FROM `User`
+      $angeltypesearch
+      LEFT JOIN `ShiftEntry` ON `User`.`UID` = `ShiftEntry`.`UID`
+      LEFT JOIN `Shifts` ON (`ShiftEntry`.`SID` = `Shifts`.`SID` AND `Shifts`.`start` < '" . sql_escape(time()) . "' AND `Shifts`.`end` > '" . sql_escape(time()) . "')
+      WHERE `User`.`Gekommen` = 1 AND `Shifts`.`SID` IS NULL
+      GROUP BY `User`.`UID`
+      ORDER BY `Nick`");
+}
+
+function User_select_nick($nick) {
+  return sql_num_query("SELECT * FROM `User` WHERE `Nick`='" . sql_escape($nick) . "' LIMIT 1");
+}
+
+function User_select_mail($mail) {
+  return sql_num_query("SELECT * FROM `User` WHERE `email`='" . sql_escape($mail) . "' LIMIT 1");
+}
+
+function User_insert($nick, $prename, $lastname, $age, $tel, $dect, $mobile, $mail, $email_shiftinfo, $jabber, $tshirt_size, $password_hash, $comment, $hometown, $twitter, $facebook, $github, $organization, $organization_web, $timezone, $planned_arrival_date) {
+  return  sql_query("
+            INSERT INTO `User` SET
+            `Nick`='" . sql_escape($nick) . "',
+            `Vorname`='" . sql_escape($prename) . "',
+            `Name`='" . sql_escape($lastname) . "',
+            `Alter`='" . sql_escape($age) . "',
+            `Telefon`='" . sql_escape($tel) . "',
+            `DECT`='" . sql_escape($dect) . "',
+            `Handy`='" . sql_escape($mobile) . "',
+            `email`='" . sql_escape($mail) . "',
+            `email_shiftinfo`=" . sql_bool($email_shiftinfo) . ",
+            `jabber`='" . sql_escape($jabber) . "',
+            `Size`='" . sql_escape($tshirt_size) . "',
+            `Passwort`='" . sql_escape($password_hash) . "',
+            `kommentar`='" . sql_escape($comment) . "',
+            `Hometown`='" . sql_escape($hometown) . "',
+            `CreateDate`= NOW(),
+            `Sprache`='" . sql_escape($_SESSION["locale"]) . "',
+            `arrival_date`= NULL,
+            `twitter`='" . sql_escape($twitter) . "',
+            `facebook`='" . sql_escape($facebook) . "',
+            `github`='" . sql_escape($github) . "',
+            `organization`='" . sql_escape($organization) . "',
+            `current_city`='" . sql_escape($current_city) . "',
+            `organization_web`='" . sql_escape($organization_web) . "',
+            `timezone`='" . sql_escape($timezone) . "',
+            `planned_arrival_date`='" . sql_escape($planned_arrival_date) . "'");
+}
+
+function update_user($eNick, $eName, $eVorname, $eTelefon, $eHandy, $eAlter, $eDECT, $eemail, $email_shiftinfo, $ejabber, $eSize, $eGekommen, $eAktiv, $force_active, $eTshirt, $Hometown, $id) {
+  return "UPDATE `User` SET
+              `Nick` = '" . sql_escape($eNick) . "',
+              `Name` = '" . sql_escape($eName) . "',
+              `Vorname` = '" . sql_escape($eVorname) . "',
+              `Telefon` = '" . sql_escape($eTelefon) . "',
+              `Handy` = '" . sql_escape($eHandy) . "',
+              `Alter` = '" . sql_escape($eAlter) . "',
+              `DECT` = '" . sql_escape($eDECT) . "',
+              `email` = '" . sql_escape($eemail) . "',
+              `email_shiftinfo` = " . sql_bool(isset($email_shiftinfo)) . ",
+              `jabber` = '" . sql_escape($ejabber) . "',
+              `Size` = '" . sql_escape($eSize) . "',
+              `Gekommen`= '" . sql_escape($eGekommen) . "',
+              `Aktiv`= '" . sql_escape($eAktiv) . "',
+              `force_active`= " . sql_escape($force_active) . ",
+              `Tshirt` = '" . sql_escape($eTshirt) . "',
+              `Hometown` = '" . sql_escape($Hometown) . "'
+              WHERE `UID` = '" . sql_escape($id) . "'
+              LIMIT 1";
+}
+
+function select_user_by_nick($nick) {
+  return sql_select("SELECT * FROM `User` WHERE `Nick`='" . sql_escape($nick) . "'");
+}
+
+function insert_user($default_theme, $nick, $prename, $lastname, $age, $tel, $dect, $native_lang, $other_langs, $mobile, $mail, $email_shiftinfo, $jabber, $tshirt_size, $password_hash, $comment, $hometown, $twitter, $facebook, $github, $organization, $current_city, $organization_web, $timezone, $planned_arrival_date) {
+  return sql_query("
+          INSERT INTO `User` SET
+          `color`='" . sql_escape($default_theme) . "',
+          `Nick`='" . sql_escape($nick) . "',
+          `Vorname`='" . sql_escape($prename) . "',
+          `Name`='" . sql_escape($lastname) . "',
+          `Alter`='" . sql_escape($age) . "',
+          `Telefon`='" . sql_escape($tel) . "',
+          `DECT`='" . sql_escape($dect) . "',
+          `native_lang`='" . sql_escape($native_lang) . "',
+          `other_langs`='" . sql_escape($other_langs) . "',
+          `Handy`='" . sql_escape($mobile) . "',
+          `email`='" . sql_escape($mail) . "',
+          `email_shiftinfo`=" . sql_bool($email_shiftinfo) . ",
+          `jabber`='" . sql_escape($jabber) . "',
+          `Size`='" . sql_escape($tshirt_size) . "',
+          `Passwort`='" . sql_escape($password_hash) . "',
+          `kommentar`='" . sql_escape($comment) . "',
+          `Hometown`='" . sql_escape($hometown) . "',
+          `CreateDate`=NOW(),
+          `Sprache`='" . sql_escape($_SESSION["locale"]) . "',
+          `arrival_date`=NULL,
+          `twitter`='" . sql_escape($twitter) . "',
+          `facebook`='" . sql_escape($facebook) . "',
+          `github`='" . sql_escape($github) . "',
+          `organization`='" . sql_escape($organization) . "',
+          `current_city`='" . sql_escape($current_city) . "',
+          `organization_web`='" . sql_escape($organization_web) . "',
+          `timezone`='" . sql_escape($timezone) . "',
+          `planned_arrival_date`='" . sql_escape($planned_arrival_date) . "'");
+}
+
+function count_user_by_nick($nick) {
+return sql_num_query("SELECT * FROM `User` WHERE `Nick`='" . sql_escape($nick) . "' LIMIT 1");
+}
+
+function count_user_by_email($mail) {
+return sql_num_query("SELECT * FROM `User` WHERE `email`='" . sql_escape($mail) . "' LIMIT 1");
+}
+
+function usercount() {
+  return sql_select("SELECT count(*) as `user_count` FROM `User`");
+}
+
+function user_count_arrived() {
+  return sql_select("SELECT count(*) as `user_count` FROM `User` WHERE `Gekommen`=1");
+}
+
+function counts_user_by_ids($user_id) {
+  return sql_num_query("SELECT * FROM `User` WHERE `UID`='" . sql_escape($user_id) . "' LIMIT 1");
+}
+
+function update_user_details($nick, $prename, $lastname, $age, $tel, $dect, $mobile, $mail, $email_shiftinfo, $jabber, $tshirt_size, $hometown, $planned_arrival_date, $planned_departure_date, $timezone, $uid) {
+  return sql_query("
+      UPDATE `User` SET
+      `Nick`='" . sql_escape($nick) . "',
+      `Vorname`='" . sql_escape($prename) . "',
+      `Name`='" . sql_escape($lastname) . "',
+      `Alter`='" . sql_escape($age) . "',
+      `Telefon`='" . sql_escape($tel) . "',
+      `DECT`='" . sql_escape($dect) . "',
+      `Handy`='" . sql_escape($mobile) . "',
+      `email`='" . sql_escape($mail) . "',
+      `email_shiftinfo`=" . sql_bool($email_shiftinfo) . ",
+      `jabber`='" . sql_escape($jabber) . "',
+      `Size`='" . sql_escape($tshirt_size) . "',
+      `Hometown`='" . sql_escape($hometown) . "',
+      `planned_arrival_date`='" . sql_escape($planned_arrival_date) . "',
+      `planned_departure_date`=" . sql_null($planned_departure_date) . "
+      `timezone`='" . sql_escape($timezone) . "',
+      WHERE `UID`='" . sql_escape($uid) . "'");
+}
+
+function update_user_sn($twitter, $facebook, $github, $uid) {
+  return   sql_query("
+      UPDATE `User` SET
+      `twitter`='" . sql_escape($twitter) . "',
+      `facebook`='" . sql_escape($facebook) . "',
+      `github`='" . sql_escape($github) . "',
+      WHERE `UID`='" . sql_escape($uid) . "'");
+}
+
+function update_user_org($organization, $organization_web, $uid) {
+  return sql_query("
+    UPDATE `User` SET
+    `organization`='" . sql_escape($organization) . "',
+    `organization_web`='" . sql_escape($organization_web) . "',
+     WHERE `UID`='" . sql_escape($uid) . "'");
+}
+
+function update_user_langs($native_lang, $other_langs, $uid) {
+  return sql_query("
+    UPDATE `User` SET
+    `native_lang`='" . sql_escape($native_lang) . "',
+    `other_langs`='" . sql_escape($other_langs) . "',
+     WHERE `UID`='" . sql_escape($uid) . "'");
+}
+
+function update_theme($selected_theme, $uid) {
+  return sql_query("UPDATE `User` SET `color`='" . sql_escape($selected_theme) . "' WHERE `UID`='" . sql_escape($uid) . "'");
+}
+
+function update_sys_lang($selected_language, $uid) {
+  return sql_query("UPDATE `User` SET `Sprache`='" . sql_escape($selected_language) . "' WHERE `UID`='" . sql_escape($uid) . "'");
+}
+
+function count_users_by_id($id) {
+  return sql_num_query("SELECT * FROM `User` WHERE `UID`='" . sql_escape($id) . "'");
+}
+
+function user_by_id($id) {
+  return sql_select("SELECT * FROM `User` WHERE `UID`='" . sql_escape($id) . "' LIMIT 1");
+}
+
 ?>

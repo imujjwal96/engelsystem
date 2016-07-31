@@ -42,4 +42,5 @@ function Settings_create($event_name, $buildup_start_date, $event_start_date, $e
 function Settings() {
   return sql_select("SELECT * FROM `Settings`");
 }
+
 ?>

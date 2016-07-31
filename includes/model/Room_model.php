@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Delete a room
  * @param int $room_id
@@ -60,5 +59,25 @@ function count_room_by_id_name($name, $id) {
 function update_rooms($name, $from_pentabarf, $public, $number, $id) {
   return sql_query("UPDATE `Room` SET `Name`='" . sql_escape($name) . "', `FromPentabarf`='" . sql_escape($from_pentabarf) . "', `show`='" . sql_escape($public) . "', `Number`='" . sql_escape($number) . "' WHERE `RID`='" . sql_escape($id) . "' LIMIT 1");
 }
+
+function gets_rooms() {
+  return sql_select("SELECT `RID` AS `id`, `Name` AS `name` FROM `Room` WHERE `show`='1' ORDER BY `Name`");
+}
+
+function selects_visible_rooms() {
+  return sql_select("SELECT * FROM `Room` WHERE `show`='1' ORDER BY `Name`");
+}
+
+function Room_by_FromPentabarf() {
+  return sql_select("SELECT * FROM `Room` WHERE `FromPentabarf`='1'");
+}
+function Room_all() {
+  return sql_select("SELECT * FROM `Room`");
+}
+
+function delete_room_by_name ($room) {
+  return sql_query("DELETE FROM `Room` WHERE `Name`='" . sql_escape($room) . "' LIMIT 1");
+}
+
 ?>
 

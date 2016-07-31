@@ -30,7 +30,10 @@ require_once realpath(__DIR__ . '/../includes/model/admin_export_model.php');
 require_once realpath(__DIR__ . '/../includes/model/News_model.php');
 require_once realpath(__DIR__ . '/../includes/model/Questions_model.php');
 require_once realpath(__DIR__ . '/../includes/model/WelcomeMessage_model.php');
+<<<<<<< HEAD
 require_once realpath(__DIR__ . '/../includes/model/admin_cgroup_model.php');
+=======
+>>>>>>> a3a4739b162204e18a12d301bc4431f04367147c
 
 require_once realpath(__DIR__ . '/../includes/view/AngelTypes_view.php');
 require_once realpath(__DIR__ . '/../includes/view/Questions_view.php');
