@@ -90,4 +90,11 @@ function select_userangeltypes($id) {
   return sql_select("SELECT * FROM `UserAngelTypes` WHERE `angeltype_id`='" . sql_escape($id) . "'");
 }
 
+function delete_needed_angeltype_by_ids($shift_id) {
+  return sql_query("DELETE FROM `NeededAngelTypes` WHERE `shift_id`='" . sql_escape($shift_id) . "'");
+}
+
+function inserts_needed_angeltypes($shift_id, $type_id, $count) {
+  return sql_query("INSERT INTO `NeededAngelTypes` SET `shift_id`='" . sql_escape($shift_id) . "', `angel_type_id`='" . sql_escape($type_id) . "', `count`='" . sql_escape($count) . "'");
+}
 ?>
