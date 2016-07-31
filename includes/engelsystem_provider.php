@@ -11,9 +11,12 @@ require_once realpath(__DIR__ . '/../includes/sys_page.php');
 require_once realpath(__DIR__ . '/../includes/sys_template.php');
 
 require_once realpath(__DIR__ . '/../includes/model/AngelType_model.php');
+require_once realpath(__DIR__ . '/../includes/model/Groups_model.php');
+require_once realpath(__DIR__ . '/../includes/model/GroupPrivileges_model.php');
 require_once realpath(__DIR__ . '/../includes/model/LogEntries_model.php');
 require_once realpath(__DIR__ . '/../includes/model/Message_model.php');
 require_once realpath(__DIR__ . '/../includes/model/NeededAngelTypes_model.php');
+require_once realpath(__DIR__ . '/../includes/model/NewsComments_model.php');
 require_once realpath(__DIR__ . '/../includes/model/Room_model.php');
 require_once realpath(__DIR__ . '/../includes/model/ShiftEntry_model.php');
 require_once realpath(__DIR__ . '/../includes/model/Shifts_model.php');
@@ -23,23 +26,11 @@ require_once realpath(__DIR__ . '/../includes/model/UserDriverLicenses_model.php
 require_once realpath(__DIR__ . '/../includes/model/UserGroups_model.php');
 require_once realpath(__DIR__ . '/../includes/model/User_model.php');
 require_once realpath(__DIR__ . '/../includes/model/Settings_model.php');
-require_once realpath(__DIR__ . '/../includes/model/admin_active_model.php');
-require_once realpath(__DIR__ . '/../includes/model/admin_arrive_model.php');
-require_once realpath(__DIR__ . '/../includes/model/admin_cgroup_model.php');
 require_once realpath(__DIR__ . '/../includes/model/admin_export_model.php');
-require_once realpath(__DIR__ . '/../includes/model/admin_free_model.php');
-require_once realpath(__DIR__ . '/../includes/model/admin_groups_model.php');
-require_once realpath(__DIR__ . '/../includes/model/admin_import_model.php');
-require_once realpath(__DIR__ . '/../includes/model/admin_news_model.php');
-require_once realpath(__DIR__ . '/../includes/model/admin_questions_model.php');
-require_once realpath(__DIR__ . '/../includes/model/user_news_model.php');
-require_once realpath(__DIR__ . '/../includes/model/user_atom_model.php');
-require_once realpath(__DIR__ . '/../includes/model/user_questions_model.php');
-require_once realpath(__DIR__ . '/../includes/model/user_myshifts_model.php');
-require_once realpath(__DIR__ . '/../includes/model/user_settings_model.php');
-require_once realpath(__DIR__ . '/../includes/model/guest_stats_model.php');
-require_once realpath(__DIR__ . '/../includes/model/admin_user_model.php');
-require_once realpath(__DIR__ . '/../includes/model/guest_login_model.php');
+require_once realpath(__DIR__ . '/../includes/model/News_model.php');
+require_once realpath(__DIR__ . '/../includes/model/Questions_model.php');
+require_once realpath(__DIR__ . '/../includes/model/WelcomeMessage_model.php');
+require_once realpath(__DIR__ . '/../includes/model/admin_cgroup_model.php');
 
 require_once realpath(__DIR__ . '/../includes/view/AngelTypes_view.php');
 require_once realpath(__DIR__ . '/../includes/view/Questions_view.php');
@@ -70,7 +61,6 @@ require_once realpath(__DIR__ . '/../includes/controller/admin_rooms_controller.
 require_once realpath(__DIR__ . '/../includes/controller/admin_shifts_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/admin_user_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/admin_settings_controller.php');
-require_once realpath(__DIR__ . '/../includes/controller/admin_cgroups_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_messages_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_news_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_questions_controller.php');
@@ -78,6 +68,7 @@ require_once realpath(__DIR__ . '/../includes/controller/user_myshifts_controlle
 require_once realpath(__DIR__ . '/../includes/controller/user_shifts_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_settings_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/guest_login_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/admin_cgroups_controller.php');
 
 require_once realpath(__DIR__ . '/../includes/helper/graph_helper.php');
 require_once realpath(__DIR__ . '/../includes/helper/internationalization_helper.php');
