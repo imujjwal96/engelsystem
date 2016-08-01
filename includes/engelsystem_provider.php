@@ -30,8 +30,6 @@ require_once realpath(__DIR__ . '/../includes/model/admin_export_model.php');
 require_once realpath(__DIR__ . '/../includes/model/News_model.php');
 require_once realpath(__DIR__ . '/../includes/model/Questions_model.php');
 require_once realpath(__DIR__ . '/../includes/model/WelcomeMessage_model.php');
-require_once realpath(__DIR__ . '/../includes/model/admin_cgroup_model.php');
-
 
 require_once realpath(__DIR__ . '/../includes/view/AngelTypes_view.php');
 require_once realpath(__DIR__ . '/../includes/view/Questions_view.php');
