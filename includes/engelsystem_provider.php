@@ -67,6 +67,7 @@ require_once realpath(__DIR__ . '/../includes/controller/user_myshifts_controlle
 require_once realpath(__DIR__ . '/../includes/controller/user_shifts_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/user_settings_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/guest_login_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/admin_cgroups_controller.php');
 
 require_once realpath(__DIR__ . '/../includes/helper/graph_helper.php');
 require_once realpath(__DIR__ . '/../includes/helper/internationalization_helper.php');
