@@ -36,7 +36,7 @@ if (isset($_REQUEST['install'])) {
     }
 }
 
-if($ok){
+if($ok) {
   $uid = 1;
   update_nick($username, $uid);
   update_mail($mail, $uid);
