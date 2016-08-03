@@ -14,7 +14,7 @@ if (isset($_REQUEST['install'])) {
       $msg .= error(sprintf(_("Your username is too short (min. 2 characters).")), true);
     }
 
-if (isset($_REQUEST['password']) && strlen($_REQUEST['password']) >= MIN_PASSWORD_LENGTH) {
+  if (isset($_REQUEST['password']) && strlen($_REQUEST['password']) >= MIN_PASSWORD_LENGTH) {
       if ($_REQUEST['password'] != $_REQUEST['password2']) {
         $ok = false;
         $msg .= error(_("Your passwords don't match."), true);
@@ -37,8 +37,10 @@ if (isset($_REQUEST['password']) && strlen($_REQUEST['password']) >= MIN_PASSWOR
 }
 
 if($ok){
-  update_install($username, $mail, "1");
-  set_password("1", $_REQUEST['password']);
+  $uid = 1;
+  update_nick($username, $uid);
+  update_mail($mail, $uid);
+  set_password($uid, $_REQUEST['password']);
   success(_("Installation successful."));
   redirect(page_link_to('login'));
 }
