@@ -77,3 +77,8 @@ INSERT INTO `GroupPrivileges` (`id`, `group_id`, `privilege_id`) VALUES (218, -4
 -- Added privilege for the Import/Export User data
 INSERT INTO `Privileges` (`id`, `name`, `desc`) VALUES (40, 'admin_export', 'Import and Export user data');
 INSERT INTO `GroupPrivileges` (`id`, `group_id`, `privilege_id`) VALUES (337, -4, 40);
+
+-- -----------------------------------------------------------------------------------
+-- Added privelege for the Create Groups page
+INSERT INTO `Privileges` (`id`, `name`, `desc`) VALUES (41, 'admin_cgroups', 'Create new groups');
+INSERT INTO `GroupPrivileges` (`id`, `group_id`, `privilege_id`) VALUES (339, -4, 41);
