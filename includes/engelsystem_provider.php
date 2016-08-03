@@ -82,6 +82,7 @@ require_once realpath(__DIR__ . '/../config/config-sample.default.php');
 if (file_exists(realpath(__DIR__ . '/../config/config.php')))
   require_once realpath(__DIR__ . '/../config/config.php');
 
+require_once realpath(__DIR__ . '/../install.php');
 if ($maintenance_mode) {
   echo file_get_contents(__DIR__ . '/../public/maintenance.html');
   die();

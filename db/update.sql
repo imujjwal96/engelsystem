@@ -82,3 +82,8 @@ INSERT INTO `GroupPrivileges` (`id`, `group_id`, `privilege_id`) VALUES (337, -4
 -- Added privelege for the Create Groups page
 INSERT INTO `Privileges` (`id`, `name`, `desc`) VALUES (41, 'admin_cgroups', 'Create new groups');
 INSERT INTO `GroupPrivileges` (`id`, `group_id`, `privilege_id`) VALUES (339, -4, 41);
+
+-- ------------------------------------------------------------------------------------
+-- Added Privilege for install page.
+INSERT INTO `Privileges` (`id`, `name`, `desc`) VALUES (42, 'install', 'Install Engelsystem');
+
