@@ -22,10 +22,10 @@ function header_toolbar() {
   if (isset($user))
     $toolbar_items[] = toolbar_item_link(page_link_to('shifts') . '&amp;action=next', 'time', User_shift_state_render($user));
 
-  if (! isset($user) && in_array('register', $privileges) && $no_migrated==1 )
+  if (! isset($user) && in_array('register', $privileges) && $no_migrated == 1)
     $toolbar_items[] = toolbar_item_link(page_link_to('register'), 'plus', register_title(), $p == 'register');
 
-  if (in_array('login', $privileges) && $no_migrated==1 )
+  if (in_array('login', $privileges) && $no_migrated == 1)
     $toolbar_items[] = toolbar_item_link(page_link_to('login'), 'log-in', login_title(), $p == 'login');
 
   if (isset($user) && in_array('user_messages', $privileges))
