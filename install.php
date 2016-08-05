@@ -7,7 +7,7 @@ function install_admin() {
 
 $settings = Settings();
 $no_migrated = $settings[0]['table_migrated'];
-if($no_migrated == 2) {
+if($no_migrated == 1) {
   redirect(page_link_to('login'));
 }
 
