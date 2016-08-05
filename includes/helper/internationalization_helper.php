@@ -72,7 +72,7 @@ function make_langselect() {
 
   $items = array();
   foreach ($locales as $locale => $name)
-    $items[] = toolbar_item_link(htmlspecialchars($URL) . $locale, '', '<img src="pic/flag/' . $locale . '.png" alt="' . $name . '" title="' . $name . '"> ' . $name);
+    $items[] = toolbar_item_link(htmlspecialchars($URL) . $locale, '', '<img src="public/pic/flag/' . $locale . '.png" alt="' . $name . '" title="' . $name . '"> ' . $name);
   return $items;
 }
 

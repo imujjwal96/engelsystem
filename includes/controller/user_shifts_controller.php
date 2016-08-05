@@ -970,7 +970,7 @@ function view_user_shifts() {
   return page(array(
       '<div class="col-md-12">',
       msg(),
-      template_render('../templates/user_shifts.html', array(
+      template_render('templates/user_shifts.html', array(
           'title' => shifts_title(),
           'room_select' => make_select($rooms, $_SESSION['user_shifts']['rooms'], "rooms", _("Rooms")),
           'start_select' => calender('start_day', date("Y/m/d"), 'start_day'),

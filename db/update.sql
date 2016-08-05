@@ -66,7 +66,8 @@ CREATE TABLE IF NOT EXISTS `Settings` (
   `event_start_date` int(11) DEFAULT NULL,
   `event_end_date` int(11) DEFAULT NULL,
   `teardown_end_date` int(11) DEFAULT NULL,
-  `event_welcome_msg` varchar(255) DEFAULT NULL
+  `event_welcome_msg` varchar(255) DEFAULT NULL,
+  `table_migrated` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- Added privilege for Admin Settings
@@ -86,4 +87,6 @@ INSERT INTO `GroupPrivileges` (`id`, `group_id`, `privilege_id`) VALUES (339, -4
 -- ------------------------------------------------------------------------------------
 -- Added Privilege for install page.
 INSERT INTO `Privileges` (`id`, `name`, `desc`) VALUES (42, 'install', 'Install Engelsystem');
+
+
 
