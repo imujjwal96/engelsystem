@@ -48,8 +48,6 @@ else{
     $settings = Settings();
     $no_migrated = 1;
     insert_table_migrated($no_migrated);
-    //migrate_install();
-    //migrate_update();
     update_nick($username, $uid);
     update_mail($mail, $uid);
     set_password($uid, $_REQUEST['password']);
