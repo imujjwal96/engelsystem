@@ -28,6 +28,10 @@ To install loklak with Docker please refer to the loklak [Docker installation re
 
 Please read how to deploy to [Heroku here](/docs/HEROKU.md)
 
+## How do I install Engelsystem on my local machine from bash script
+
+Please check out [the documentation here](/docs/INSTALLATION_BASH_SCRIPT.md).
+
 ## Report Bugs
 
 Please report bugs and feature requests here https://github.com/engelsystem/engelsystem/issues
