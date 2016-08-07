@@ -14,7 +14,7 @@ function admin_arrive() {
     $id = $_REQUEST['reset'];
     $user_source = User($id);
     if ($user_source != null) {
-      sql_query("UPDATE `User` SET `Gekommen`=0, `arrival_date` = NULL WHERE `UID`='" . sql_escape($id) . "' LIMIT 1");
+      User_update_unset_Gokemon($id);
       engelsystem_log("User set to not arrived: " . User_Nick_render($user_source));
       success(_("Reset done. Angel has not arrived."));
       redirect(user_link($user_source));
@@ -24,7 +24,7 @@ function admin_arrive() {
     $id = $_REQUEST['arrived'];
     $user_source = User($id);
     if ($user_source != null) {
-      sql_query("UPDATE `User` SET `Gekommen`=1, `arrival_date`='" . time() . "' WHERE `UID`='" . sql_escape($id) . "' LIMIT 1");
+      User_update_set_Gokemon($id);
       engelsystem_log("User set has arrived: " . User_Nick_render($user_source));
       success(_("Angel has been marked as arrived."));
       redirect(user_link($user_source));
@@ -32,7 +32,7 @@ function admin_arrive() {
       $msg = error(_("Angel not found."), true);
   }
 
-  $users = sql_select("SELECT * FROM `User` ORDER BY `Nick`");
+  $users = Users();
   $arrival_count_at_day = [];
   $planned_arrival_count_at_day = [];
   $planned_departure_count_at_day = [];

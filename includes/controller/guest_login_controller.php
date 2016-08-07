@@ -42,9 +42,9 @@ function guest_register() {
   $timezone = "";
   $timezone_identifiers = DateTimeZone::listIdentifiers();
 
-  $welcome_message = sql_select("SELECT * FROM `Welcome_Message`");
+  $welcome_message = WelcomeMessage();
   $display_message = $welcome_message[0]['display_msg'];
-  $angel_types_source = sql_select("SELECT * FROM `AngelTypes` ORDER BY `name`");
+  $angel_types_source = select_angeltype();
   $angel_types = array();
   foreach ($angel_types_source as $angel_type) {
     $angel_types[$angel_type['id']] = $angel_type['name'] . ($angel_type['restricted'] ? " (restricted)" : "");
@@ -57,7 +57,7 @@ function guest_register() {
 
     if (isset($_REQUEST['nick']) && strlen(User_validate_Nick($_REQUEST['nick'])) > 1) {
       $nick = User_validate_Nick($_REQUEST['nick']);
-      if (sql_num_query("SELECT * FROM `User` WHERE `Nick`='" . sql_escape($nick) . "' LIMIT 1") > 0) {
+      if (count_user_by_nick($nick) > 0) {
         $ok = false;
         $msg .= error(sprintf(_("Your nick &quot;%s&quot; already exists."), $nick), true);
       }
@@ -72,7 +72,7 @@ function guest_register() {
         $ok = false;
         $msg .= error(_("E-mail address is not correct."), true);
       }
-      if (sql_num_query("SELECT * FROM `User` WHERE `email`='" . sql_escape($mail) . "' LIMIT 1")  > 0) {
+      if (count_user_by_email($mail) > 0) {
         $ok = false;
         $msg .= error(sprintf(_("Your E-mail &quot;%s&quot; already exists.<a href=%s>Forgot password?</a>"), $mail,page_link_to_absolute('user_password_recovery')), true);
       }
@@ -215,46 +215,16 @@ function guest_register() {
       $dect = strip_request_item('organization_web');
 
     if ($ok) {
-      sql_query("
-          INSERT INTO `User` SET
-          `color`='" . sql_escape($default_theme) . "',
-          `Nick`='" . sql_escape($nick) . "',
-          `Vorname`='" . sql_escape($prename) . "',
-          `Name`='" . sql_escape($lastname) . "',
-          `Alter`='" . sql_escape($age) . "',
-          `Telefon`='" . sql_escape($tel) . "',
-          `DECT`='" . sql_escape($dect) . "',
-          `native_lang`='" . sql_escape($native_lang) . "',
-          `other_langs`='" . sql_escape($other_langs) . "',
-          `Handy`='" . sql_escape($mobile) . "',
-          `email`='" . sql_escape($mail) . "',
-          `email_shiftinfo`=" . sql_bool($email_shiftinfo) . ",
-          `jabber`='" . sql_escape($jabber) . "',
-          `Size`='" . sql_escape($tshirt_size) . "',
-          `Passwort`='" . sql_escape($password_hash) . "',
-          `kommentar`='" . sql_escape($comment) . "',
-          `Hometown`='" . sql_escape($hometown) . "',
-          `CreateDate`=NOW(),
-          `Sprache`='" . sql_escape($_SESSION["locale"]) . "',
-          `arrival_date`=NULL,
-          `twitter`='" . sql_escape($twitter) . "',
-          `facebook`='" . sql_escape($facebook) . "',
-          `github`='" . sql_escape($github) . "',
-          `organization`='" . sql_escape($organization) . "',
-          `current_city`='" . sql_escape($current_city) . "',
-          `organization_web`='" . sql_escape($organization_web) . "',
-          `timezone`='" . sql_escape($timezone) . "',
-          `planned_arrival_date`='" . sql_escape($planned_arrival_date) . "'");
-
+      insert_user($default_theme, $nick, $prename, $lastname, $age, $tel, $dect, $native_lang, $other_langs, $mobile, $mail, $email_shiftinfo, $jabber, $tshirt_size, $password_hash, $comment, $hometown, $twitter, $facebook, $github, $organization, $current_city, $organization_web, $timezone, $planned_arrival_date);
       // Assign user-group and set password
       $user_id = sql_id();
-      sql_query("INSERT INTO `UserGroups` SET `uid`='" . sql_escape($user_id) . "', `group_id`=-2");
+      insert_UserGroups_by_id($user_id);
       set_password($user_id, $_REQUEST['password']);
 
       // Assign angel-types
       $user_angel_types_info = array();
       foreach ($selected_angel_types as $selected_angel_type_id) {
-        sql_query("INSERT INTO `UserAngelTypes` SET `user_id`='" . sql_escape($user_id) . "', `angeltype_id`='" . sql_escape($selected_angel_type_id) . "'");
+        insert_UserAngelTypes($user_id, $selected_angel_type_id);
         $user_angel_types_info[] = $angel_types[$selected_angel_type_id];
       }
 
@@ -344,10 +314,10 @@ function guest_register() {
                   )),
                   div('row', array(
                   div('col-sm-8', array(
-                  	form_select('native_lang', _("Native Language").' '. entry_required(), languages(), $native_lang, 'English')
+                    form_select('native_lang', _("Native Language").' '. entry_required(), languages(), $native_lang, 'English')
                       ))
                   )),
-		              div('row', array(
+                  div('row', array(
                   div('col-sm-8', array(
                           form_multiselect('other_langs', _("Other Languages"), languages(), $other_langs, 'English')
                       ))
@@ -424,7 +394,7 @@ function guest_login() {
 
     if (isset($_REQUEST['nick']) && strlen(User_validate_Nick($_REQUEST['nick'])) > 0) {
       $nick = User_validate_Nick($_REQUEST['nick']);
-      $login_user = sql_select("SELECT * FROM `User` WHERE `Nick`='" . sql_escape($nick) . "'");
+      $login_user = select_user_by_nick($nick);
       if (count($login_user) > 0) {
         $login_user = $login_user[0];
         if (isset($_REQUEST['password'])) {

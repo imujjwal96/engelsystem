@@ -30,7 +30,7 @@ Please read how to deploy to [Heroku here](/docs/HEROKU.md)
 
 ## Report Bugs
 
-Please report bugs and feature requests here https://github.com/fossasia/engelsystem/issues
+Please report bugs and feature requests here https://github.com/engelsystem/engelsystem/issues
 
 # Features of Engelsystem
 
@@ -54,7 +54,7 @@ Please report bugs and feature requests here https://github.com/fossasia/engelsy
 -   Views
     -   *Map view* - In the shifts page user/admin can view the shifts in map view where rooms and  shifts according to their timings.
     -   *Normal view*  - when user/admin undo the new style if possible checkbox.
--   Edit shifts(Admin) 
+-   Edit shifts(Admin)
     -   There is a edit image or pencil image on the shifts when we press it admin will be redirected to Edit shifts page where admin can update the information by selecting update shifts option
 -   Create new shifts from exisitng shifts(Admin)
     -   Once admin selects the edit option admin can also create new shifts from existing shift data by selecting create new shift option
@@ -63,7 +63,7 @@ Please report bugs and feature requests here https://github.com/fossasia/engelsy
 
 ##### Sending message
 -    User/admin can send messages to other angels or group members or to only members of angeltypes
-by clicking th message icon     
+by clicking th message icon
 
 #### Admin Pages
 -   Arrived Angels

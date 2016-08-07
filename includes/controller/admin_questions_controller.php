@@ -7,7 +7,7 @@ function admin_new_questions() {
   global $user, $privileges;
 
   if (in_array("admin_questions", $privileges)) {
-    $new_messages = sql_num_query("SELECT * FROM `Questions` WHERE `AID` IS NULL");
+    $new_messages = Questions();
 
     if ($new_messages > 0)
       return info('<a href="' . page_link_to("admin_questions") . '">' . _('There are unanswered questions!') . '</a>', true);
@@ -21,7 +21,7 @@ function admin_questions() {
 
   if (! isset($_REQUEST['action'])) {
     $unanswered_questions_table = array();
-    $questions = sql_select("SELECT * FROM `Questions` WHERE `AID` IS NULL");
+    $questions = Questions();
     foreach ($questions as $question) {
       $user_source = User($question['UID']);
       if ($user_source === false)
@@ -39,7 +39,7 @@ function admin_questions() {
     }
 
     $answered_questions_table = array();
-    $questions = sql_select("SELECT * FROM `Questions` WHERE NOT `AID` IS NULL");
+    $questions = Questions();
     foreach ($questions as $question) {
       $user_source = User($question['UID']);
       if ($user_source === false)
@@ -82,12 +82,12 @@ function admin_questions() {
         else
           return error("Incomplete call, missing Question ID.", true);
 
-        $question = sql_select("SELECT * FROM `Questions` WHERE `QID`='" . sql_escape($id) . "' LIMIT 1");
+        $question = Questions_by_id($id);
         if (count($question) > 0 && $question[0]['AID'] == null) {
           $answer = trim(preg_replace("/([^\p{L}\p{P}\p{Z}\p{N}\n]{1,})/ui", '', strip_tags($_REQUEST['answer'])));
 
           if ($answer != "") {
-            sql_query("UPDATE `Questions` SET `AID`='" . sql_escape($user['UID']) . "', `Answer`='" . sql_escape($answer) . "' WHERE `QID`='" . sql_escape($id) . "' LIMIT 1");
+            update_questions($user, $answer, $id);
             engelsystem_log("Question " . $question[0]['Question'] . " answered: " . $answer);
             redirect(page_link_to("admin_questions"));
           } else
@@ -101,9 +101,9 @@ function admin_questions() {
         else
           return error("Incomplete call, missing Question ID.", true);
 
-        $question = sql_select("SELECT * FROM `Questions` WHERE `QID`='" . sql_escape($id) . "' LIMIT 1");
+        $question = Questions_by_id($id);
         if (count($question) > 0) {
-          sql_query("DELETE FROM `Questions` WHERE `QID`='" . sql_escape($id) . "' LIMIT 1");
+          delete_questions_by_id($id);
           engelsystem_log("Question deleted: " . $question[0]['Question']);
           redirect(page_link_to("admin_questions"));
         } else

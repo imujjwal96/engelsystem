@@ -32,7 +32,7 @@
 
 **        exit;**
 
-*   Go to **engelsystem/config** and copy the default config into config.php. Modify the new file to match your MySQL credentials so that the system could access the database on the localserver.
+*   Go to **engelsystem/config** and copy the default config-sample into config.php. Modify the new file to match your MySQL credentials so that the system could access the database on the localserver.
 
 *      Move the app to your **/var/www/html/** directory by typing **mv ./engelsystem /var/www/html**
 
@@ -52,7 +52,7 @@
 
 > **service apache2 restart**
 
-## Setting up Captcha  
+## Setting up Captcha
 *  For setting up captcha for the online server, we need to signup for reCaptcha API keys. The keys are unique to the domain or domains you specify, and their respective sub-domains. Specifying more than one domain could come in handy in the case that you serve your website from multiple top level domains (for example: yoursite.com, yoursite.net).
 By default, all keys work on "localhost" (or "127.0.0.1"), so you can always develop and test on your local machine.
 
