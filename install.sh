@@ -18,18 +18,20 @@ echo "Install MySQL"
 sudo apt-get install mysql-server mysql-client
 sudo mysql_secure_installation
 
-$version = lsb_release -r -s
-if [ $version -lt 16 ]
+version=$(lsb_release -r -s)
+if (( $(echo "$version < 16" |bc -l) ))
 then
-  $php_version = php -v | head -1 | cut -d " " -f2 | cut -d "-"
-  if [ $php_version -ge 5 ]
+ php_version=$(php -v | head -1 | cut -d " " -f2 | cut -d "." -f1)
+  if(( $(echo "$php_version >= 5" |bc -l) ))
   then
-    sudo apt-get purge php5-common -y
-    sudo apt-get install php7.0 php7.0-fpm php7.0-mysql -y
+    sudo apt-get -y purge php5-common
+    sudo add-apt-repository ppa:ondrej/php
+    #installing Apache 2, mysql modules for php7.0
+    sudo apt-get install -y libapache2-mod-php7.0 php7.0 php7.0-mysql
   fi
-elif [ $version -eq 16.01  ]
+elif (( $(echo "$version > 16 " |bc -l) ))
 then
-  sudo apt-get install php7.0 php7.0-fpm php7.0-mysql -y
+  sudo apt-get install -y libapache2-mod-php7.0 php7.0 php7.0-mysql
 fi
 
 echo "Install git"
