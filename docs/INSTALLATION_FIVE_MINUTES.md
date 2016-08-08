@@ -24,6 +24,6 @@ Please check out the docs for more information [the documentation here](/docs/).
 - Upload the engelsystem files to the desired location on your web server. For Apache server we need to upload to /var/www/html/ and we can view engelsystem on localhost/engelsystem/
 
 ### Step 5: Run the Install Script
-- If you placed the engelsystem files in the root directory, you should visit: localhost/engelsystem/public
+- If you placed the engelsystem files in the root directory, you should visit: localhost/engelsystem/
 
 Once you have filled the information and clicked install engelsystem. We are redirected to login page where we can login with the credentials with admin rights.

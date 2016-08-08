@@ -8,7 +8,7 @@ function install_admin() {
   $no_migrated = $settings[0]['table_migrated'];
   if ($no_migrated == 1) {
     redirect(page_link_to('login'));
-}
+  }
   else {
     if (isset($_REQUEST['install'])) {
       $ok = true;
@@ -52,11 +52,11 @@ function install_admin() {
     success(_("Installation successful."));
     redirect(page_link_to('login'));
   }
-    return page_with_title(install_title(), array(
-        $msg,
-        div('well well-sm text-center', [
-       _('Welcome')
-     ]).div('row', array(
+  return page_with_title(install_title(), array(
+      $msg,
+      div('well well-sm text-center', [
+       ('Welcome')
+      ]).div('row', array(
             div('col-md-12', array(
                 form(array(
                   form_info('', _("Welcome to the famous five-minute Engelsystem installation process! Just fill in the information below and you’ll be on your way to volunteer management application for events.")),

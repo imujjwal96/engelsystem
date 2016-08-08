@@ -26,10 +26,6 @@ then
 elif (( $php5 != 0 ))
 then
   sudo apt-get install -y libapache2-mod-php5 php5 php5-mysql
-else
-  sudo add-apt-repository ppa:ondrej/php
-  sudo apt-get -y update
-  sudo apt-get install -y libapache2-mod-php7.0 php7.0 php7.0-mysql
 fi
 
 echo "Install git"
@@ -52,4 +48,4 @@ sudo cp config/config-sample.default.php config/config.php
 
 echo "Restarting Apache"
 sudo service apache2 restart
-echo "Engelsystem is successfully installed and can be viewed on local server at localhost/engelsystem/public"
+echo "Engelsystem is successfully installed and can be viewed on local server at localhost/engelsystem/"
