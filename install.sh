@@ -43,11 +43,11 @@ cd engelsystem
 echo "enter mysql root password"
 # creating new database engelsystem
 echo "create database engelsystem" | mysql -u root -p
-echo "enter your mysql root password to migrate the tables to engelsystem database"
+echo "enter your mysql root password to import the tables to engelsystem database"
 mysql -u root -p engelsystem < db/install.sql
 mysql -u root -p engelsystem < db/update.sql
 
-echo "edit the database name username and password in config/config.php file"
+echo "Edit the database name username and password in config/config.php file"
 sudo cp config/config-sample.default.php config/config.php
 
 echo "Restarting Apache"
