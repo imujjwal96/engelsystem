@@ -18,19 +18,17 @@ echo "Install MySQL"
 sudo apt-get install mysql-server mysql-client
 sudo mysql_secure_installation
 
-version=$(lsb_release -r -s)
-if (( $(echo "$version < 16" |bc -l) ))
+php5=$(sudo apt-cache search php5 | wc -l)
+php7=$(sudo apt-cache search php7 | wc -l)
+if (( $php7 != 0 ))
 then
- php_version=$(php -v | head -1 | cut -d " " -f2 | cut -d "." -f1)
-  if(( $(echo "$php_version >= 5" |bc -l) ))
-  then
-    sudo apt-get -y purge php5-common
-    sudo add-apt-repository ppa:ondrej/php
-    #installing Apache 2, mysql modules for php7.0
-    sudo apt-get install -y libapache2-mod-php7.0 php7.0 php7.0-mysql
-  fi
-elif (( $(echo "$version > 16 " |bc -l) ))
+  sudo apt-get install -y libapache2-mod-php7.0 php7.0 php7.0-mysql
+elif (( $php5 != 0 ))
 then
+  sudo apt-get install -y libapache2-mod-php5 php5 php5-mysql
+else
+  sudo add-apt-repository ppa:ondrej/php
+  sudo apt-get -y update
   sudo apt-get install -y libapache2-mod-php7.0 php7.0 php7.0-mysql
 fi
 
@@ -49,8 +47,8 @@ echo "enter your mysql root password to migrate the tables to engelsystem databa
 mysql -u root -p engelsystem < db/install.sql
 mysql -u root -p engelsystem < db/update.sql
 
-echo "enter the database name username and password"
-cp config/config-sample.default.php config/config.php
+echo "edit the database name username and password in config/config.php file"
+sudo cp config/config-sample.default.php config/config.php
 
 echo "Restarting Apache"
 sudo service apache2 restart
