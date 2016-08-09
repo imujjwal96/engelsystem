@@ -41,7 +41,7 @@ function install_admin() {
       }
   }
 
-  if($ok) {
+  if ($ok) {
     $uid = 1;
     $settings = Settings();
     $no_migrated = 1;

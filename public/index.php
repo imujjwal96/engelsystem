@@ -158,7 +158,7 @@ if (isset($_REQUEST['p']) && preg_match("/^[a-z0-9_]*$/i", $_REQUEST['p']) && (i
     $title = _("No Access");
     $content = _("You don't have permission to view this page. You probably have to sign in or register in order to gain access!");
   } else {
-    // Otherwise lead to the login page
+    // Otherwise lead to the install page
     redirect(page_link_to("install"));
   }
 }
