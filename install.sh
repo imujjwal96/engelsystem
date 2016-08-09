@@ -46,6 +46,7 @@ mysql -u root -p engelsystem < db/update.sql
 echo "Edit the database name username and password in config/config.php file"
 sudo cp config/config-sample.default.php config/config.php
 
-echo "Restarting Apache"
+echo "Changing the document root and restarting apache"
+sudo sed -i -e 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/engelsystem\/public/g'  /etc/apache2/sites-available/000-default.conf
 sudo service apache2 restart
-echo "Engelsystem is successfully installed and can be viewed on local server at localhost/engelsystem/"
+echo "Engelsystem is successfully installed and can be viewed on local server at localhost/"
