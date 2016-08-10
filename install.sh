@@ -48,7 +48,6 @@ sudo cp config/config-sample.default.php config/config.php
 
 echo "Adding folder permission for Apache"
 sudo chown -R www-data /var/www/html/engelsystem/
-sudo chmod -R g+rw /var/www/html/engelsystem/
 
 echo "Changing the document root and restarting apache"
 sudo sed -i -e 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/engelsystem\/public/g'  /etc/apache2/sites-available/000-default.conf

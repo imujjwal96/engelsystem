@@ -30,6 +30,7 @@ require_once realpath(__DIR__ . '/../includes/model/admin_export_model.php');
 require_once realpath(__DIR__ . '/../includes/model/News_model.php');
 require_once realpath(__DIR__ . '/../includes/model/Questions_model.php');
 require_once realpath(__DIR__ . '/../includes/model/WelcomeMessage_model.php');
+require_once realpath(__DIR__ . '/../includes/model/import_model.php');
 
 require_once realpath(__DIR__ . '/../includes/view/AngelTypes_view.php');
 require_once realpath(__DIR__ . '/../includes/view/Questions_view.php');
@@ -93,8 +94,7 @@ require_once realpath(__DIR__ . '/../vendor/parsedown/Parsedown.php');
 session_start();
 
 gettext_init();
-
-sql_connect($config['host'], $config['user'], $config['pw'], $config['db']);
+sql_connect($DB_HOST, $DB_USER, $DB_PASSWORD,$DB_NAME);
 
 load_auth();
 

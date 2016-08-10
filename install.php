@@ -43,14 +43,20 @@ function install_admin() {
 
   if ($ok) {
     $uid = 1;
-    $settings = Settings();
-    $no_migrated = 1;
-    insert_table_migrated($no_migrated);
-    update_nick($username, $uid);
-    update_mail($mail, $uid);
-    set_password($uid, $_REQUEST['password']);
-    success(_("Installation successful."));
-    redirect(page_link_to('login'));
+    // importing tables
+    if (import_tables()) {
+      $no_migrated = 1;
+      insert_table_migrated($no_migrated);
+      update_nick($username, $uid);
+      update_mail($mail, $uid);
+      set_password($uid, $_REQUEST['password']);
+      success(_("Installation successful."));
+      redirect(page_link_to('login'));
+    }
+    else {
+      error(_("Installation Failed"));
+      redirect(page_link_to('install'));
+    }
   }
   return page_with_title(install_title(), array(
       $msg,
