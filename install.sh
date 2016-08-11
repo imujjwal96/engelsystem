@@ -36,12 +36,9 @@ echo "Cloning the github repository"
 sudo git clone --recursive https://github.com/fossasia/engelsystem.git
 cd engelsystem
 
-echo "enter mysql root password"
+echo "Creating database engelsystem, enter mysql root password"
 # creating new database engelsystem
 echo "create database engelsystem" | mysql -u root -p
-echo "enter your mysql root password to import to engelsystem database"
-mysql -u root -p engelsystem < db/install.sql
-mysql -u root -p engelsystem < db/update.sql
 
 echo "Edit the database name username and password in config/config.php file"
 sudo cp config/config-sample.default.php config/config.php
