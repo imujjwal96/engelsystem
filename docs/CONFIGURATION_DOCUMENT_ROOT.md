@@ -15,20 +15,10 @@ or you can execute the following command in your terminal
 
 $ ```sudo sed -i -e 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/engelsystem\/public/g' /etc/apache2/sites-available/000-default.conf```
 
-### Set the right Apache configuration
+### Set the right Apache folder Permissions
 
-The configuration of the /etc/www folder is under /etc/apache2/apache2.conf. Edit this file to add the configuration of your new document root.
+$ ```sudo chown -R www-data /var/www/html/engelsystem/```
 
-``` $ sudo nano /etc/apache2/apache2.conf ```
-
-Add the following lines
-```
-<Directory /var/www/html/engelsystem/public>
-        Options  FollowSymLinks
-        AllowOverride None
-        Require all granted
-</Directory>
-```
 ### Restart Apache
 $ ``` sudo service apache2 restart ```
 
