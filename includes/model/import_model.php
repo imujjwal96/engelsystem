@@ -12,10 +12,8 @@ function import_tables() {
 
   switch ($worked_install && $worked_update) {
       case 0:
-          echo 'Files imported successfully to database <b>' .$DB_NAME .'</b>';
           return true;
       case 1:
-          echo 'There was an error during import.';
           return false;
   }
 }

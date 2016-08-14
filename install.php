@@ -10,6 +10,8 @@ function install_admin() {
     redirect(page_link_to('login'));
   }
   else {
+    // importing tables
+    $val = import_tables();
     if (isset($_REQUEST['install'])) {
       $ok = true;
       if (isset($_REQUEST['username']) && strlen(strip_request_item('username')) > 1) {
@@ -43,13 +45,13 @@ function install_admin() {
 
   if ($ok) {
     $uid = 1;
-    // importing tables
-    if (import_tables()) {
+    if ($val) {
       $no_migrated = 1;
       insert_table_migrated($no_migrated);
       update_nick($username, $uid);
       update_mail($mail, $uid);
       set_password($uid, $_REQUEST['password']);
+      success(_("Files imported successfully to database"));
       success(_("Installation successful."));
       redirect(page_link_to('login'));
     }
