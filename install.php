@@ -76,10 +76,10 @@ function install_admin() {
             div('col-md-12', array(
                 form(array(
                   form_info('', _("Please provide the following information. Don’t worry, you can always change these settings later. All fields are compulsory")),
-                  form_text('username', _("Username"), $username),
-                  form_password('password', _("Password")),
+                  form_text('username', _("Enter New Username"), $username),
+                  form_password('password', _("Enter New Password")),
                   form_password('password2', _("Confirm Password")),
-                  form_email('mail', _("E-Mail"), $mail),
+                  form_email('mail', _("Enter E-Mail"), $mail),
                   form_submit('install', _("Install Engelsystem"))
                 ))
             ))
