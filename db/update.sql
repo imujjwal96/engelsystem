@@ -82,3 +82,8 @@ INSERT INTO `GroupPrivileges` (`id`, `group_id`, `privilege_id`) VALUES (337, -4
 -- Added privelege for the Create Groups page
 INSERT INTO `Privileges` (`id`, `name`, `desc`) VALUES (41, 'admin_cgroups', 'Create new groups');
 INSERT INTO `GroupPrivileges` (`id`, `group_id`, `privilege_id`) VALUES (339, -4, 41);
+
+-- -----------------------------------------------------------------------------------
+-- Added privelege for the Create Events page
+INSERT INTO `Privileges` (`id`, `name`, `desc`) VALUES (42, 'admin_events', 'Create new Events');
+INSERT INTO `GroupPrivileges` (`id`, `group_id`, `privilege_id`) VALUES (347, -4, 42);
