@@ -5,7 +5,12 @@ function install_title() {
 
 function install_admin() {
   $settings = Settings();
-  $no_migrated = $settings[0]['table_migrated'];
+  if ($settings == false) {
+    $no_migrated = 0;
+  }
+  else {
+    $no_migrated = $settings[0]['table_migrated'];
+  }
   if ($no_migrated == 1) {
     redirect(page_link_to('login'));
   }
@@ -67,7 +72,7 @@ function install_admin() {
       ]).div('row', array(
             div('col-md-12', array(
                 form(array(
-                  form_info('', _("Welcome to the famous five-minute Engelsystem installation process! Just fill in the information below and you’ll be on your way to volunteer management application for events.")),
+                  form_info('', _("Welcome to the famous five-minute Engelsystem installation process! Just fill in the information below and you’ll be on your way to volunteer management application for events with admin rights.")),
                 ))
             ))
         )).div('well well-sm text-center', [
@@ -76,7 +81,7 @@ function install_admin() {
             div('col-md-12', array(
                 form(array(
                   form_info('', _("Please provide the following information. Don’t worry, you can always change these settings later. All fields are compulsory")),
-                  form_text('username', _("Enter New Username"), $username),
+                  form_text('username', _("Enter Admin Username"), $username),
                   form_password('password', _("Enter New Password")),
                   form_password('password2', _("Confirm Password")),
                   form_email('mail', _("Enter E-Mail"), $mail),
