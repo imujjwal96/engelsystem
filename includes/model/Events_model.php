@@ -173,7 +173,7 @@ function event_venue($venue) {
  * @param $organizer event
  *          ORGANIZER
  */
-function event_organizer($id) {
+function event_organizer($organizer) {
   $event_source = sql_select("SELECT * FROM `Events` WHERE `organizer`='" . sql_escape($organizer) . "' ");
   if ($event_source === false)
     return false;
