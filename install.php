@@ -4,6 +4,11 @@ function install_title() {
 }
 
 function install_admin() {
+
+  $ok = false;
+  $msg = "";
+  $username = "";
+  $mail = "";
   $settings = Settings();
   if ($settings == false) {
     $no_migrated = 0;
