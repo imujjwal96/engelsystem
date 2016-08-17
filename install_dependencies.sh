@@ -49,4 +49,4 @@ sudo chown -R www-data /var/www/html/engelsystem/
 echo "Changing the document root and restarting apache"
 sudo sed -i -e 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/engelsystem\/public/g'  /etc/apache2/sites-available/000-default.conf
 sudo service apache2 restart
-echo "Engelsystem is successfully installed and can be viewed on local server at localhost/"
+echo "All the dependencies are installed and Engelsystem can be viewed on local server at localhost/"
