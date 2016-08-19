@@ -17,4 +17,12 @@ function import_tables() {
           return false;
   }
 }
+
+function test_import() {
+  global $DB_NAME;
+  $sql = "SHOW TABLES FROM $DB_NAME";
+  $result = sql_query($sql);
+  return $result;
+}
+
 ?>

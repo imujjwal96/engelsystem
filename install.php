@@ -9,7 +9,9 @@ function install_admin() {
   $msg = "";
   $username = "";
   $mail = "";
-  $settings = Settings();
+  $settings = array();
+  if (test_import())
+    $settings = Settings();
   if ($settings == false) {
     $no_migrated = 0;
   }

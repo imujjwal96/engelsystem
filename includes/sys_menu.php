@@ -15,8 +15,12 @@ function page_link_to_absolute($page) {
  */
 function header_toolbar() {
   global $p, $privileges, $user, $enable_tshirt_size, $max_freeloadable_shifts;
-  $settings = Settings();
-  $no_migrated = $settings[0]['table_migrated'];
+  $settings = array();
+  $no_migrated = "";
+  if (test_import()) {
+    $settings = Settings();
+    $no_migrated = $settings[0]['table_migrated'];
+  }
   $toolbar_items = array();
 
   if (isset($user))
