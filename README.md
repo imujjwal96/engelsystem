@@ -22,11 +22,15 @@ Please check out [the documentation here](/docs/INSTALLATION_LOCAL.md).
 
 ## How do I install Engelsystem on Docker
 
-To install Engelsystem with Docker please refer to the Engelsystem [Docker installation readme](/docs/INSTALLATION_DOCKER.md).
+To install with Docker please refer to the [Docker installation readme](/docs/INSTALLATION_DOCKER.md).
 
 ## How do I deploy Engelsystem with Heroku?
 
 Please read how to deploy to [Heroku here](/docs/HEROKU.md)
+
+## How do I install Engelsystem on my local machine from bash script
+
+Please check out [the documentation here](/docs/INSTALLATION_BASH_SCRIPT.md).
 
 ## Report Bugs
 

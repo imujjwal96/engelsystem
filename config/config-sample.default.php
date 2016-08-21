@@ -49,8 +49,8 @@ $shift_sum_formula = "SUM(
 
 // voucher calculation
 $voucher_settings = array(
-	"initial_vouchers" => 2,
-	"shifts_per_voucher" => 1
+  "initial_vouchers" => 2,
+  "shifts_per_voucher" => 1
 );
 
 // weigh every shift the same
@@ -60,12 +60,10 @@ $voucher_settings = array(
 $api_key = "";
 
 // MySQL-Connection Settings
-$config = array(
-    'host' => "localhost",
-    'user' => "username_here",
-    'pw' => "password_here",
-    'db' => "database_name_here"
-);
+$DB_HOST = "localhost";
+$DB_USER = "username_here";
+$DB_PASSWORD = "password_here";
+$DB_NAME = "database_name_here";
 
 /** reCaptcha Settings
  * Visit http://www.google.com/recaptcha/admin#whyrecaptcha for generating reCaptcha keys for your website.
