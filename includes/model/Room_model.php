@@ -17,12 +17,13 @@ function Room_delete($room_id) {
  * @param boolean $public
  *          Is the room visible for angels?
  */
-function Room_create($name, $from_frab, $public) {
+function Room_create($name, $from_frab, $public, $number, $event_id) {
   $result = sql_query("
       INSERT INTO `Room` SET
       `Name`='" . sql_escape($name) . "',
       `FromPentabarf`='" . sql_escape($from_frab ? 1 : '') . "',
       `show`='" . sql_escape($public ? 1 : '') . "',
+      `e_id`='" . sql_escape($event_id) . "',
       `Number`=0");
   if ($result === false)
     return false;
@@ -56,8 +57,8 @@ function count_room_by_id_name($name, $id) {
   return sql_num_query("SELECT * FROM `Room` WHERE `Name`='" . sql_escape($name) . "' AND NOT `RID`=" . sql_escape($id));
 }
 
-function update_rooms($name, $from_pentabarf, $public, $number, $id) {
-  return sql_query("UPDATE `Room` SET `Name`='" . sql_escape($name) . "', `FromPentabarf`='" . sql_escape($from_pentabarf) . "', `show`='" . sql_escape($public) . "', `Number`='" . sql_escape($number) . "' WHERE `RID`='" . sql_escape($id) . "' LIMIT 1");
+function update_rooms($name, $from_pentabarf, $public, $number, $id, $event_id) {
+  return sql_query("UPDATE `Room` SET `Name`='" . sql_escape($name) . "', `FromPentabarf`='" . sql_escape($from_pentabarf) . "', `show`='" . sql_escape($public) . "', `Number`='" . sql_escape($number) . "', `e_id`='" . sql_escape($event_id) . "' WHERE `RID`='" . sql_escape($id) . "' LIMIT 1");
 }
 
 function gets_rooms() {
@@ -90,4 +91,3 @@ function Rooms() {
 }
 
 ?>
-
