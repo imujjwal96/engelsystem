@@ -50,7 +50,7 @@ function event_update($event_id, $name, $description, $organizer, $start_date, $
  * @param string $venue
  */
 function event_create($name, $description, $organizer, $start_date, $start_time, $end_date, $end_time, $venue) {
-  $result = sql_query("
+  return sql_query("
       INSERT INTO `Events` SET
       `name`='" . sql_escape($name) . "',
       `description`='" . sql_escape($description) . "',
@@ -59,10 +59,7 @@ function event_create($name, $description, $organizer, $start_date, $start_time,
       `start_time`='" . sql_escape($start_time) . "',
       `end_date`='" . sql_escape($end_date) . "',
       `end_time`='" . sql_escape($end_time) . "',
-      `venue`='" . sql_escape($venue));
-  if ($result === false)
-    return false;
-  return sql_id();
+      `venue`='" . sql_escape($venue) . "'");
 }
 
 /**

@@ -12,7 +12,7 @@ function admin_rooms() {
   foreach($event_source as $event) {
     $events[$event['event_id']] = $event['name'];
   }
-  $event_id = null;
+  $event_id = " ";
 
   $rooms_source = Room_by_name();
   $rooms = array();
@@ -99,9 +99,6 @@ function admin_rooms() {
             error(_('Please select an Event type.'));
           } else
               $event_id = $_REQUEST['event_id'];
-        } else {
-            $ok = false;
-            error(_('Please select an Event type.'));
         }
 
         foreach ($angeltypes as $angeltype_id => $angeltype) {
