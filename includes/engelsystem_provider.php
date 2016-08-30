@@ -30,6 +30,8 @@ require_once realpath(__DIR__ . '/../includes/model/admin_export_model.php');
 require_once realpath(__DIR__ . '/../includes/model/News_model.php');
 require_once realpath(__DIR__ . '/../includes/model/Questions_model.php');
 require_once realpath(__DIR__ . '/../includes/model/WelcomeMessage_model.php');
+require_once realpath(__DIR__ . '/../includes/model/Events_model.php');
+require_once realpath(__DIR__ . '/../includes/model/import_model.php');
 
 require_once realpath(__DIR__ . '/../includes/view/AngelTypes_view.php');
 require_once realpath(__DIR__ . '/../includes/view/Questions_view.php');
@@ -68,6 +70,7 @@ require_once realpath(__DIR__ . '/../includes/controller/user_shifts_controller.
 require_once realpath(__DIR__ . '/../includes/controller/user_settings_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/guest_login_controller.php');
 require_once realpath(__DIR__ . '/../includes/controller/admin_cgroups_controller.php');
+require_once realpath(__DIR__ . '/../includes/controller/admin_events_controller.php');
 
 require_once realpath(__DIR__ . '/../includes/helper/graph_helper.php');
 require_once realpath(__DIR__ . '/../includes/helper/internationalization_helper.php');
@@ -82,6 +85,7 @@ require_once realpath(__DIR__ . '/../config/config-sample.default.php');
 if (file_exists(realpath(__DIR__ . '/../config/config.php')))
   require_once realpath(__DIR__ . '/../config/config.php');
 
+require_once realpath(__DIR__ . '/../install.php');
 if ($maintenance_mode) {
   echo file_get_contents(__DIR__ . '/../public/maintenance.html');
   die();
@@ -92,8 +96,7 @@ require_once realpath(__DIR__ . '/../vendor/parsedown/Parsedown.php');
 session_start();
 
 gettext_init();
-
-sql_connect($config['host'], $config['user'], $config['pw'], $config['db']);
+sql_connect($DB_HOST, $DB_USER, $DB_PASSWORD,$DB_NAME);
 
 load_auth();
 

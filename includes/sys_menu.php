@@ -15,16 +15,21 @@ function page_link_to_absolute($page) {
  */
 function header_toolbar() {
   global $p, $privileges, $user, $enable_tshirt_size, $max_freeloadable_shifts;
-
+  $settings = array();
+  $no_migrated = "";
+  if (test_import()) {
+    $settings = Settings();
+    $no_migrated = $settings[0]['table_migrated'];
+  }
   $toolbar_items = array();
 
   if (isset($user))
     $toolbar_items[] = toolbar_item_link(page_link_to('shifts') . '&amp;action=next', 'time', User_shift_state_render($user));
 
-  if (! isset($user) && in_array('register', $privileges))
+  if (! isset($user) && in_array('register', $privileges) && $no_migrated == 1)
     $toolbar_items[] = toolbar_item_link(page_link_to('register'), 'plus', register_title(), $p == 'register');
 
-  if (in_array('login', $privileges))
+  if (in_array('login', $privileges) && $no_migrated == 1)
     $toolbar_items[] = toolbar_item_link(page_link_to('login'), 'log-in', login_title(), $p == 'login');
 
   if (isset($user) && in_array('user_messages', $privileges))
@@ -128,7 +133,8 @@ function make_navigation() {
       "admin_log" => admin_log_title(),
       "admin_export" => admin_export_title(),
       "admin_settings" => admin_settings_title(),
-      "admin_cgroups" => admin_cgroups_title()
+      "admin_cgroups" => admin_cgroups_title(),
+      "admin_events" => admin_events_title()
   );
 
   foreach ($admin_pages as $page => $title)
