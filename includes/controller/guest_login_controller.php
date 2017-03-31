@@ -44,7 +44,7 @@ function guest_register() {
 
   $welcome_message = WelcomeMessage();
   $display_message = $welcome_message[0]['display_msg'];
-  $angel_types_source = select_angeltype();
+  $angel_types_source = select_angeltypes();
   $angel_types = array();
   foreach ($angel_types_source as $angel_type) {
     $angel_types[$angel_type['id']] = $angel_type['name'] . ($angel_type['restricted'] ? " (restricted)" : "");
@@ -210,7 +210,7 @@ function guest_register() {
     if (isset($_REQUEST['github']))
       $dect = strip_request_item('github');
     if (isset($_REQUEST['organization']))
-      $dect = strip_request_item('oragnization');
+      $dect = strip_request_item('organization');
     if (isset($_REQUEST['organization_web']))
       $dect = strip_request_item('organization_web');
 
@@ -314,12 +314,12 @@ function guest_register() {
                   )),
                   div('row', array(
                   div('col-sm-8', array(
-                    form_select('native_lang', _("Native Language").' '. entry_required(), languages(), $native_lang, 'English')
+                    form_select('native_lang', _("Native Language").' '. entry_required(), languages())
                       ))
                   )),
                   div('row', array(
                   div('col-sm-8', array(
-                          form_multiselect('other_langs', _("Other Languages"), languages(), $other_langs, 'English')
+                          form_multiselect('other_langs', _("Other Languages"), languages())
                       ))
                   )),
                   div('row', array(
@@ -463,6 +463,7 @@ function guest_login() {
 /**
  * Generates a list of Languages with their ISO Codes
  */
+
 function languages() {
   $xml = simplexml_load_file("https://www.facebook.com/translations/FacebookLocales.xml");
   foreach($xml->xpath("/locales/locale") as $item) {
